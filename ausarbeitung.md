@@ -360,6 +360,21 @@
     - Fehler Erkennung
     - Basic Services (Session Handling, Accounting, Sicherheit, Proxy)
 - **Header**
-
-
+    - Version 8bit -> zwangsweise 1
+    - Msg Length 24bit -> Länge Header + Body
+    - Flags 8bit
+        - REQU/RESP -> 1/0
+        - Proxyable -> Proxy, Redirect, Relay Agent erlauben
+        - Error Bit -> Protokollfehler anzeigen
+        - T-Bit -> retransmit bei failover ??
+        - reserve 4bit
+    - Command Code 24bit -> Kodierter Typ für einzelne Aktionen
+    - Application ID 32bit -> Zuordnung auf Anwendung
+    - Hop by Hop ID 32bit -> wird durch Proxy etc geändert
+    - End to End ID 32bit -> eindeutig bis zum bittere ende
+- **Peer Connection**
+    - zwischen 2 Peers genau eine permanente TCP oder SCTP Verbindung
+    - mehrere Sessions möglich
+- **Capabilities Exchange
+    
 
