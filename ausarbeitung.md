@@ -118,7 +118,9 @@
 - UDP
 - Paketorientiert
 
-# TCP  
+# Transportprotokolle
+
+## TCP  
 
 - Transmission Control Protocol
 - verbindungsorientiert, Duplex, E2E, L4
@@ -194,7 +196,7 @@
         - für Angriffe auf das OS
         - Fingerprint verwischen/fälschen
 
-# UDP 
+## UDP 
 
 - verbindungslos
 - Nachteile:
@@ -211,7 +213,7 @@
     - Length 16bit
     - Checksum 16bit
 
-# SCTP
+## SCTP
 
 - Stream Control Transmission Protocol
 - verbindungsorientiert, Multihoming,
@@ -259,13 +261,51 @@
     - Slow Start
     - Separat für jeden Stream
 
-# DCCP
+## DCCP
 
 - Data Congestion Control Protocol
 - verbindungsorientiert
 - Transfer unsicher (ACK ohne Retransmit)
 - Echtzeitdaten
 - Congestion Control
+
+## Vergleich
+
++--------------------------------+----------+----------+---------+----------+
+| **Merkmal**                    | **SCTP** | **TCP**  | **UDP** | **DCCP** |
++--------------------------------+----------+----------+---------+----------+
+| *Vollduplex*                   | OK       | OK       | OK      | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Verbindungsorientiert*        | OK       | OK       | X       | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *sichere Übertragung*          | OK       | OK       | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *geordnete Übertragung*        | OK       | ok       | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *ungeordnete Übertragung*      | OK       | X        | OK      | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Flow Control*                 | OK       | OK       | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *Congestion Control*           | OK       | OK       | X       | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Selective ACKs*               | OK       | optional | X       | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Paketorientiert*              | OK       | X        | OK      | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Path MTU Discovery*           | OK       | OK       | X       | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *PDU Fragmentierung*           | OK       | OK       | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *PDU Bündelung*                | OK       | OK       | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *Multistreaming*               | OK       | X        | X       | X        |
++--------------------------------+----------+----------+---------+----------+
+| *Schutz gegen Syn Flooding*    | OK       | optional | -       | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Fehlererkennung*              | OK       | OK       | OK      | OK       |
++--------------------------------+----------+----------+---------+----------+
+| *Pseudo-Header für Checksumme* | X        | OK       | OK      | OK       |
++--------------------------------+----------+----------+---------+----------+
 
 # AAA
 
