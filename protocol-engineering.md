@@ -11,7 +11,7 @@ Ziel: Ingenieurmäßige Entwicklung von Kommunikationssoftware
     * Einfluss der Standardisierung
     * mehrfache Implementierung der Protokolle
 
-* ** Einteilung in mehrere Schritte**
+* **Einteilung in mehrere Schritte**
     * Anforderungsanlyse
         * Anforderungsspezifiaktion
     * Dienst u. Protokollentwurf
@@ -43,11 +43,10 @@ Ziel: Ingenieurmäßige Entwicklung von Kommunikationssoftware
 
 ## Dienstspezifikation
 
-"Was"-Spezifikation
-
-* Was soll für ein Dienst erbracht werden
-* Häufigvernachlässigt
-* Schnittstelle von außen betrachtet
+* **"Was"-Spezifikation**
+    * Was soll für ein Dienst erbracht werden
+    * Häufigvernachlässigt
+    * Schnittstelle von außen betrachtet
 
 Die Dienstspezifikation beschreibt die Eigenschaften des bereit-
 gestellten Dienstes und die Art und Weise seiner Nutzung.
@@ -81,13 +80,12 @@ gestellten Dienstes und die Art und Weise seiner Nutzung.
 
 ## Protokollspezifikation
 
-"Wie"-Spezifikation
-
-* Wie soll der Dienst erbracht werden
-* Interne Umsetzung des Dienstes
-* "Wie"-Spezifikation ist nötig, weil Protokolle *mehrfach* implementiert werden *müssen*
-    * verschiedene Betriebssysteme
-    * unterschiedliche Ablaufumgebungen
+* **"Wie"-Spezifikation**
+    * Wie soll der Dienst erbracht werden
+    * Interne Umsetzung des Dienstes
+    * "Wie"-Spezifikation ist nötig, weil Protokolle *mehrfach* implementiert werden *müssen*
+        * verschiedene Betriebssysteme
+        * unterschiedliche Ablaufumgebungen
 
 Die Protokollspezifikation beschreibt die Art und Weise, wie die
 Instanzen in einem Protokoll miteinander kommunizieren, um den
