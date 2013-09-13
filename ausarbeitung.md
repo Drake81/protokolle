@@ -399,5 +399,33 @@
     - zwischen 2 Peers genau eine permanente TCP oder SCTP Verbindung
     - mehrere Sessions möglich
 - **Capabilities Exchange
-    
+    - erfolgt nach Verbindungsaufbau
+    - Identitäten der anderen Peers feststellen
+    - austausch der Fähigkeiten: Protokollversion, Diameter Applicationen, Sicherheitsmechanismen
+    - Verbindungsaufbau wird abgebrochen, falls Applicationen und Sicherheitsmechanismen nicht unterstützt werden
+- **Watchdog**
+    - Heartbeat zur aktiven Überwachung der Connectivity
+    - mittels Device Watchdog Request DWR
+    - bleibt Device Watchdog Answer DWA aus, wird auf secondary Peer umgeschaltet
+    - DWR Zeitintervall wird manuell festgelegt
+- **Agenten**
+    - Relay Agent -> routen von Diameter Nachrichten zwischen Peers
+    - Proxy -> routen und verändern anhand von Policies
+    - Redirect Agent -> zentraler Informationsverwalter bzgl Routinginformationen
+    - Translation Agent -> zusammenführen verschiedener Applicationen und Protokolle, z.B. Datenbanken zweier Domaenen mit ihren AAA oder RADIUS/Diameter
+
+# Vergleich Radius mit Diameter
+
+| **Eigenschaft**         | **Radius**         | **Diameter**         |
+|-------------------------|--------------------|----------------------|
+| Header                  | 8 bit              | 32 bit               |
+| Attribut Laenge         | 8 bit              | 24 bit               |
+| Flusssteuerung          | UDP-keine          | TCP, SCTP            |
+| Architektur             | Client-Server      | Peer                 |
+| nicht lesbare Nachricht | verwerfen          | Error-FLag           |
+| Server Status           | keine Info         | Watchdog             |
+| Vendor Codes            | X                  | OK                   |
+| Failover                | X                  | OK                   |
+| Roaming                 | OK                 | OK                   |
+| Sicherheit              | Hop, Shared Secret | Hop, End, IPSec, TLS |
 
