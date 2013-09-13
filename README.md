@@ -3,4 +3,4 @@ Protokolle
 
 Ausarbeitung zur Vorlesung *Protokolle*
 
-(Die Ausrabeitung)[ausarbeitung.md]
+[Ausarbeitung: Protokolle](ausarbeitung.md)
