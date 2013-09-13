@@ -104,7 +104,103 @@ spezifizierten Dienst zu erbingen.
     * interne Ereignisse
     * lokale Aktionen
 
-# Beschreibungstechniken
+# Beschreibunsmethoden und Beschreibungstechniken
+
+Dienen der Beschreibung des **Protokollablaufs**
+
+## Beschreibungsmethoden vs. Beschreibungstechniken
+
+* **Beschreibungsmethoden**
+    * Methoden für die Beschreibung
+    * Grundlage für die Modelle der Beschreibunstechniken
+    * Bsp:
+        * endliche Zustandsautomaten
+        * Petri Netze
+    * **KEINE vollständige Beschreibung**
+
+* **Beschreibungstechniken**
+    * Spezifikationssprachen für eine *formale* Beschreibung
+    * Bsp:
+        * SDL
+        * Lotos
+    * Nutz eine formale Semantik
+    * **WEITGEHEND volständige Beschreibung**
+
+
+## Beschreibungsmethoden
+
+* **Arten:**
+    * Konstruktive Methoden
+    * Deskriptive Methoden
+
+### Konstruktive Methoden
+
+* Beschreibt Protokoll durch *abstraktes* Modell
+* Interpretation durch semantisches Modell
+* Quasi-Implementierung
+* Bsp:
+    * endliche Zustansautomaten
+
+* **Vorteile**
+    * direkte Unterstützung von:
+        * Entwurf
+        * Implementierung
+    * Ausführliche Spezifikation
+        * *Rapid Prototyping*
+
+* **Nachteile**
+    * keine Darstellung von Eigenschaften
+
+### Deskriptive Methoden
+
+* beschreiben Eigenschaften eines Protokolls
+* Unterlegen keine spezielle Interpretationsvorschrift
+* Beschriebene Eigenschaften:
+    * **Lebendigkeitseigenschaften**
+    * **Sicherheitseigenschaften**
+* Bsp: 
+    * Temporale Logiken
+
+
+* **Vorteile**
+    * direkte Formulierung gewünschter Eigenschaften
+    * verifizierbar
+
+* **Nachteile**
+    * i. Allg. nicht entscheidbar, ob die Spezifikation das erlaubte Verhalten vollständig beschreibt
+    * kein Prototyping
+    * keine direkte Ableitung von Implementierungen
+
+### Klassifikation der Beschreibungsmethoden
+
+
+                | Spezifikationsmethoden                                                            |
+----------------|-----------------------------------------------------------|-----------------------|
+Klassifikation  |               konstruktiv                                     |  deskriptiv       |
+                | zustandsorientiert     |       transitionsorientiert          |                   |
+                |                        | prozessorientiert | ablauforientiert |                   |
+----------------|------------------------|-------------------|------------------|-------------------|
+Methoden        |  endl. Zustandsautomat | Prozessalgebren   | Zeitablauf-Dia.  | Temporale Logiken |
+                |  Petri-Netze           | Petri-Netze       | Petri-Netze      |                   |
+----------------|------------------------|-------------------|------------------|-------------------|
+FDTs            |  SDL                   | SDL               | MSC              | cTLA              |
+                |                        | Lotos             |                  |                   |
+
+* **Beschreibungsmethoden sind:**
+    * Endliche Zustandsautomaten
+    * Erweiterte endliche Zustandsautomaten
+    * Petri-Netze
+    * Algebraische Prozesskalküle
+    * Temporale Logiken
+    * Hybride Methoden
+
+### Endliche Zustandsautomaten
+
+
+
+
+## Beschreibungstechniken
+
 
 # Entwicklung
 
