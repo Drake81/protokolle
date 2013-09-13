@@ -173,18 +173,41 @@ Dienen der Beschreibung des **Protokollablaufs**
 
 ### Klassifikation der Beschreibungsmethoden
 
+**konstruktiv und zustandorientiert**
 
-                | Spezifikationsmethoden                                                            |
-----------------|-----------------------------------------------------------|-----------------------|
-Klassifikation  |               konstruktiv                                     |  deskriptiv       |
-                | zustandsorientiert     |       transitionsorientiert          |                   |
-                |                        | prozessorientiert | ablauforientiert |                   |
-----------------|------------------------|-------------------|------------------|-------------------|
-Methoden        |  endl. Zustandsautomat | Prozessalgebren   | Zeitablauf-Dia.  | Temporale Logiken |
-                |  Petri-Netze           | Petri-Netze       | Petri-Netze      |                   |
-----------------|------------------------|-------------------|------------------|-------------------|
-FDTs            |  SDL                   | SDL               | MSC              | cTLA              |
-                |                        | Lotos             |                  |                   |
+* Methoden:
+    * endl. Zustandsautomaten
+    * Petri-Netze
+* FDTs:
+    * SDL 
+
+
+**konstruktiv und transitorientiert und prozessorientiert**
+
+* Methoden:
+    * Prozessalgebren
+    * Petri-Netze
+* FDTs
+    * SDL
+    * Lotos
+
+
+**konstruktiv und transitorientiert und ablauforientiert**
+
+* Methoden:
+    * Zeitablaufdiagramme
+    * Petri-Netze
+* FDTs
+    * MSC
+
+
+**deskriptiv**
+
+* Methoden:
+    * Temporale Logiken
+* FDTs
+    * cTLA             
+
 
 * **Beschreibungsmethoden sind:**
     * Endliche Zustandsautomaten
