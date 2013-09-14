@@ -371,7 +371,7 @@
     - zwischengeschalteter Proxy der als Vermittler fungiert
     - fügt/entfernt Proxy Attribute
 
-# DIAMETER
+## DIAMETER
 
 - Nachfolger von RADIUS
 - TCP, SCTP
@@ -414,7 +414,7 @@
     - Redirect Agent -> zentraler Informationsverwalter bzgl Routinginformationen
     - Translation Agent -> zusammenführen verschiedener Applicationen und Protokolle, z.B. Datenbanken zweier Domaenen mit ihren AAA oder RADIUS/Diameter
 
-# Vergleich Radius mit Diameter
+## Vergleich Radius mit Diameter
 
 | **Eigenschaft**         | **Radius**         | **Diameter**         |
 |-------------------------|--------------------|----------------------|
@@ -429,3 +429,42 @@
 | Roaming                 | OK                 | OK                   |
 | Sicherheit              | Hop, Shared Secret | Hop, End, IPSec, TLS |
 
+## EAP
+
+- Extensible Authentication Protocol
+- Authentication Framework auf Layer 2(Ethernet, WLAN, PPP)
+ -> da Supplicant an Netzzugangspunkten noch keine IP besitzt
+- Funktionsprimitive:
+    - Datenübertragung (Timer, Retransmission)
+    - Nutzer Identifikation
+    - Auswahl Authentifizierungsverfahren
+- **Header**
+    - Code 8bit -> Nachrichten Msg (Requ, Resp, Success, Failure)
+    - Identifier 8bit
+    - Length 32bit
+    - Type 8bit -> gibt die Unterabfrage an, was gerade gefordert/geschickt wird (Identity, Notification, NACK, MD5 Challenge…)
+- **Authentifizierung**
+    - Supplicant startet mit EAPOL-Start
+    - Authenticator erfragt Identitaet (Nutzernamen) -> Type 1
+    - Supplicant schickt Identitaet
+    - Authenticator startet Authentifizierung und schickt MD5 Challenge
+    - Supplicant erfüllt Challenge oder schickt NACK mit anderem Verfahrensvorschlag
+    - Authenticator wählt aus und startet Authentifizierung erneut
+- **PEAP**
+    - Protected EAP
+    - TLS Tunnel zu beginn
+        -> Identitaet wird geschützt
+    - danach EAP Ablauf
+- **EAP-TLS**
+    - Zertifikatsbasierte Authentifizierung
+    - kein Identitätsschutz
+- **EAP-TTLS**
+    - EAP -Tunneling TLS
+    - Authentifizierung erfolgt dann mit EAP oder PAP/CHAP/MSCHAP
+    - bei Verwendung von EAP ist es gleich dem PEAP
+
+## IEEE 802.1X
+
+- zur Authentifizierung in Layer 2 Netzen
+- portbasierte Authentifizierung
+- 
