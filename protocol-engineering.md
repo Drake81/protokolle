@@ -396,6 +396,136 @@ Temporale Logiken sind Erweiterungen der Aussagenlogik und der Prädikatenlogik 
 
 ## Beschreibungstechniken
 
+* **Anforderungen**
+    * präzise, eindeutig, vollständig
+        * Vermeidung von Mehrdeutigkeit
+    * Implementierungsunabhängig
+        * Unterstützt verschiedene Ablaufumgebungen
+    * verständlich
+        * Vermeidung von Missinterpretation
+    * modular, veränderbar
+        * ermöglicht modifikation und erweiterung
+
+* **Verschiedene Techniken**
+    * SDL
+        * **Wichtigste Technik**
+        * graphische/sprachliche Notation
+    * MSC
+        * ablauforientiert
+        * graphische Notation
+        * meist im Kontext von *SDL* eingesetzt
+    * Estelle
+        * sprachliche Notation
+        * *kaum noch Benutzt*
+    * Lotos
+        * Prozessalgebra
+        * sprachliche Notation
+    * ASN.1
+        * bevorzugte Notation für Datenformate
+    * UML2
+        * *keine* formale Beschreibungstechnik!
+            * wg. fehlender Semantik
+        * *immer beliebter*
+    * TTCN
+        * Informale Testnotation
+
+### SDL - Specifikation and Description Language
+
+Ziel: *Formale Beschreibung von Telekommunikationssystemen*
+
+* Objekt-Orientiert
+* SDL-2000: Aktuelle Version
+    * Bietet *Agentenkonzept*
+
+* **SDL-Notationen**
+    * SDL/GR - graphische Notation
+    * SDL/PR - textuelle Notation
+    * *Besitzen gemeinsame Sprachelemente*
+
+* **Agenten**
+    * beschreiben aktive Komponenten
+    * sind endl. Zustansautomaten
+    * *besitzen:*
+        * Identifikation
+        * Lebensdauer
+        * Warteschlange für *Stimuli*
+
+* **Arten von Agenten**
+    * Blöcke
+        * enthält *Blöcke* und *Prozesse*
+        * *nebenläufige Ausführung*
+    * Prozesse
+        * enthält *nur* Prozesse
+        * *alternierende Ausführung* - Nur eine Transition
+    * System
+        * äußerster Block
+
+* **Stimuli**
+    * Ereigniss das Zustandsübergang auslöst
+    * Erstes Ergeigniss in Warteschlange
+
+**Kommunikation zwischen Agenten über**
+
+* **asynchronern Nachrichtenaustausch mit Signalen**
+    * Hat *Namen*
+    * impliziete *Senderidentifikation*
+    * Austausch der Signale über **Kanäle** 
+
+* **Kanäle**
+    * Zuverlässige, reihenfolge bewahrende Übertragung
+    * *Übertragungsarten*
+        * verzögernd
+        * verzögerungsfrei
+
+* **Gates**
+    * Endpunkte der Kanäle
+    * externe Kommunikationspunkte der Agenten
+    * implizite/explizite Gates
+
+* **entfernte Prozeduraufrufe Client/Server-Prinzip**
+* **gemeinsame Variable**
+
+* **Komposite Zustände und Zustandsaggregation**
+    * erst seit SDL 2000
+    * Komposite Zustände
+        * hierarchische Struktur von Zuständen
+        * alle Zustände eine gemeinsame Warteschlange
+        * Agent kann sich in mehreren Teilzuständen befinden
+        * es wird immer nur eine Transition ausgeführt
+* Zustandsaggregation
+    * Partitionierung eines kompositen Zustands in mehrere (komposite) Zustände, die nach dem Interleaving-Prinzip ausgeführt werden
+
+* **Ausnahmen**
+    * erst seit SDL 2000
+    * beschreiben unerwartetes Verhalten, z. B. Fehlersituationen
+    * Verzweigung zu einer Ausnahmebehandlung
+        * explizit beschrieben
+
+* **Objekt-Orientierung**
+    * *Typen* - Klassen
+        * Agententypen
+        * komposite Zustandstypen
+        * Signaltypen
+        * einfach Datentypen
+    * *Instanzen* - entspricht Objekte
+        * System
+        * Block
+        * Prozess
+        * Signal
+
+* **Formale SDL-Semantik**
+    * *Statische Semantik*
+        * nur für Kernsprache definiert
+        * Ableitung eines abstrakten Syntaxbaums
+    * *Dynamische Semantik*
+        * Ableitung eines Verhaltensmodell aus Syntaxbaum
+        * Interpretation als ASM-Kode
+        * SDL-to-ASM-Compiler
+
+### MSC - Message Sequence Charts
+
+
+
 
 # Entwicklung
 
