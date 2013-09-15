@@ -216,7 +216,7 @@ Anmerkung: **FDT -> Field Device Tool**
 
 ### Endliche Zustandsautomaten
 
-* Quintupel aus: <S,I,O,T,s0>
+* Quintupel aus: (S,I,O,T,s0)
     * S - Zustände
     * I - Eingaben
     * O - Ausgaben
@@ -236,7 +236,7 @@ Anmerkung: **FDT -> Field Device Tool**
 
 ### Erweiterte endliche Zustansautomaten
 
-* Tupel aus: <S,C,I,O,T,s0,c0>
+* Tupel aus: (S,C,I,O,T,s0,c0)
     * S - Zustände
     * C - Kontexte
     * I - Eingaben
