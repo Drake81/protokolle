@@ -3,7 +3,7 @@
 Ziel: Ingenieurmäßige Entwicklung von Kommunikationssoftware
 
 * **Unterscheidung zur norm. Softwareentwicklung durch:**
-    * systematische Entwurfsmethodik nicht ausgeprägt
+    * systematische Entwurfsmethodik (nicht ausgeprägt)
     * mehrere Spezifikationsebenen
     * Komplexität der Protokolle
     * Nebenläufigkeit, Nichtdeterminismen
@@ -39,7 +39,7 @@ Ziel: Ingenieurmäßige Entwicklung von Kommunikationssoftware
         * Vereinfachte Darstellung
         * Höhere Flexibilität
 
-** Auflösung von Nichtdeterminismen erst in der Implementierung**
+**Auflösung von Nichtdeterminismen erst in der Implementierung**
 
 ## Dienstspezifikation
 
@@ -153,14 +153,13 @@ Dienen der Beschreibung des **Protokollablaufs**
 
 ### Deskriptive Methoden
 
-* beschreiben Eigenschaften eines Protokolls
+* beschreiben *Eigenschaften* eines Protokolls
 * Unterlegen keine spezielle Interpretationsvorschrift
 * Beschriebene Eigenschaften:
     * **Lebendigkeitseigenschaften**
     * **Sicherheitseigenschaften**
 * Bsp: 
     * Temporale Logiken
-
 
 * **Vorteile**
     * direkte Formulierung gewünschter Eigenschaften
@@ -173,6 +172,8 @@ Dienen der Beschreibung des **Protokollablaufs**
 
 ### Klassifikation der Beschreibungsmethoden
 
+Anmerkung: **FDT -> Field Device Tool**
+
 **konstruktiv und zustandorientiert**
 
 * Methoden:
@@ -181,33 +182,29 @@ Dienen der Beschreibung des **Protokollablaufs**
 * FDTs:
     * SDL 
 
-
 **konstruktiv und transitorientiert und prozessorientiert**
 
 * Methoden:
     * Prozessalgebren
     * Petri-Netze
-* FDTs
+* FDTs:
     * SDL
     * Lotos
-
 
 **konstruktiv und transitorientiert und ablauforientiert**
 
 * Methoden:
     * Zeitablaufdiagramme
     * Petri-Netze
-* FDTs
+* FDTs:
     * MSC
-
 
 **deskriptiv**
 
 * Methoden:
     * Temporale Logiken
-* FDTs
+* FDTs:
     * cTLA             
-
 
 * **Beschreibungsmethoden sind:**
     * Endliche Zustandsautomaten
@@ -219,8 +216,183 @@ Dienen der Beschreibung des **Protokollablaufs**
 
 ### Endliche Zustandsautomaten
 
+* Quintupel aus: <S,I,O,T,s0>
+    * S - Zustände
+    * I - Eingaben
+    * O - Ausgaben
+    * T - Zustandsüberführungsfunktion
+    * s0 - Init-Zustand
+* Transition t ist Zustandsübergang
+* Wenn t != I, dann *spotane Transition*
 
+* **Vorteile**
+    * natürliche Beschreibung
+    * einfache Darstellung
+    * gut nutzbar für Implementierung
 
+* **Nachteile**
+    * Kommunikationsablauf kann nicht dargestellt werden
+    * viele Zustände -> sehr groß und unübersichtlich
+
+### Erweiterte endliche Zustansautomaten
+
+* Tupel aus: <S,C,I,O,T,s0,c0>
+    * S - Zustände
+    * C - Kontexte
+    * I - Eingaben
+    * O - Ausgaben
+    * T - Zustandsüberführungsfunktion
+    * s0 - Init-Zustand
+    * c0 - Init-Kontext
+* Transition t ist Zustandsübergang
+* Wenn t != I, dann *spotane Transition*
+* Kontext entspricht *wertbelegung der Variablen*
+
+* **Vorteile**
+    * natürliche Beschreibung
+    * einfache Erstellung und Darstellung
+    * weniger komplex als endl. Zustandsautomat
+    * gut nutzbar für Implementierung
+
+* **Nachteile**
+    * Kommunikationsablauf kann nicht dargestellt werden
+    * viele Zustände -> sehr groß und unübersichtlich
+    * weniger geeigent für Dienstspezifikationen
+    * Testfälle nicht direkt ableitbar
+
+**Beliebteste Beschreibunsmethode für Protokolle**
+
+### Petri-Netze
+
+**Netz**
+
+* Tripel N=(P,T,F)
+    * P - Plätze (Zustände,Bedingungen)
+    * T - Transition (Ereignisse, Übergänge)
+    * F - Flussrelation (Kanten zwischen den Plätzen/Zuständen)
+
+**Petri-Netz**
+
+* Quintupel N=(P,T,F,V,m0)
+    * (P,T,F) - ein Netz
+    * V - positive ganze Zahl die einer Kante zugeordnet ist
+        * V - Kantenvielfalt (V=1 für gewöhnliche Netzte)
+    * m0 - Anfangsmarkierung von P
+
+* **Vorteile**
+    * abstrakte Modellierung des Kontrollflusses
+        * Unterstützung der Verifikation
+    * Darstellung paralleler Abläufe
+    * Nachvollziehen von Abläufen durch Verfolgen des Markenflusses
+        * Prototyping
+
+* **Nachteile**
+    * sehr abstrakte Darstellung
+        * Problem: Fehlerlokalisierung
+    * sehr komplex bei vielen Zuständen
+    * keine oder aufwendige Darstellung wichtiger Protokollelemente
+        * Aufbau PDUs, Reihenfolgeüberwachung u. a.
+
+**Petri-Netze werden für die Protokollbeschreibung in der Praxis**
+
+* **Nutzung von Petri-Netzen**
+    * Leistungsanlyse
+    * Verfikation
+
+### Prozessalgebren
+
+* **Prozessalgebren**
+    * modellieren das Verhalten von Systemen durch Menge wechselwirkender Prozesse
+    * nur das äußere Verhalten der Prozesse wird betrachtet.
+    * Verallgemeinerung der klassischen Automatentheorie
+    * Beschreibung der Systeme über die Kooperation kleinerer Komponenten, die **Prozesse**.
+
+* **Grundelemente**
+    * Aktion
+    * Kompositionsoperatoren
+
+* **Aktion**
+    * ist: atomare, synchrone Interaktion mit einem *anderen* Prozess
+    * werden durch *Label* repräsentiert
+
+* **Label**
+    * Ports über die interagiert wird
+    * Keine Unterscheidung zwischen Ein-/Ausgabeereignissen
+
+* **Vorteile**
+    * exakte und vollständige Beschreibung
+    * Unterstützung der formalen Verifikation
+    * Unterstützung Testfallableitung
+
+* **Nachteile**
+    * sehr abstrakte Darstellung
+    * große Distanz zur Implementierung
+        * mehr Freiheitsgrade für Implementierung
+    * hoher Grad an Formalität
+        * Probleme in der Nutzerakzeptanz
+
+**Sehr begrenzte Nutzung für praktische Protokollentwicklung**
+
+### Temporale Logiken
+
+Temporale Logiken sind Erweiterungen der Aussagenlogik und der Prädikatenlogik durch Operatoren, die die Formulierung von Aussagen mit Bezug auf die Zeit gestatten.
+
+* nicht die absolute Zeit interessiert, sondern die zeitliche Folge, in der sich die Dinge ereignen
+* beschreiben Eigenschaften, die das Protokoll erfüllen soll
+* Einhaltung der Eigenschaften im Protokollentwurf wird durch temporallogisches Schließen oder Model Checking überprüft
+
+**Wichtigste deskriptive Beschreibungsmethode für Kommunikationsprotokolle !!!**
+
+* **Unterscheidung der Eigenschaften**
+    * Sicherheitseigenschaften
+        * safety properties
+    * Lebendigkeitseigenschaften
+        * liveness properties
+
+* **Sicherheitseigenschaften**
+    * Bestimmt unerwünschte Ereignisse werden *nicht* eintreten
+        * Beispiel: Keine Dateneinheit geht verloren
+    * Erfüllt wenn nichts passiert  
+
+* **Lebendigkeitseigenschaften**
+    * sicherstellen, dass Ereignisse auch wirklich eintreten
+    * beschreiben was passieren *muss*
+        * Beispiel: Nach Verbindungsaufbau wird Datentransfer-Phase erreicht und die Daten übertragen
+
+* **Arten temporaler Logiken**
+    * *Lineare temporale Logiken*
+        * modellieren Verhalten in lineare Folge von Zuständen
+        * nur zeitliches Verhalten
+        * Erlaubt Aussagen zu Gegenwart und Zukunft
+        * Nutzung: *Software Verfikation*
+    * *Verzweigende temporale Logiken*
+        * alternatives Verhalten in einem Zustand möglich
+        * Verschiedene zeitliche Abläufe
+        * Zustandsbaum
+        * Nutzung: *Hardware Verfikation*
+
+* **Vorteile**
+    * explizite Spezifikation der zu erfüllenden Eigenschaften
+    * Allgemeingültigkeit kann formal bewiesen werden
+        * Inkonsistenzen können aufgedeckt werden
+
+* **Nachteile**
+    * Übergang zur Implementierung kompliziert
+        * fehlende Werkzeugunterstützung
+    * hoher Einarbeitungsaufwand
+        * Vorkenntnisse erforderlich
+
+**Für praktischen Protokollspezifikationen kaum genutzt !!!**
+
+### Zusammenfassung
+
+* **FSM** reine FSM werden nur begrenzt genutzt
+* **EFSM** Populärste Beschreibungsmethode für Protokolle
+* **Petri-Netze** werden in der Praxis kaum genutzt 
+* **Prozessalgebren** sehr begrenzte Nutzung
+* **Temporale Logiken** werden in der Praxis kaum genutzt
+    * Anwendung in Kombination mit anderen Methoden
+    * (Model Checking)
 
 ## Beschreibungstechniken
 
