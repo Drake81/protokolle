@@ -75,28 +75,28 @@
 - dynamische Zuweisung der Netzconfig
 - UDP (Client 546, Server 547)
 - **Ablauf**
-- link local generieren (Unterschied zu DHCP)
-- SOLICIT an Multicast FF02::1:2
-- Server senden ADVERTISE
-- Client schickt an 1 Server einen REQUEST für Parameter
-- Server sendet REPLY
+    - link local generieren (Unterschied zu DHCP)
+    - SOLICIT an Multicast FF02::1:2
+    - Server senden ADVERTISE
+    - Client schickt an 1 Server einen REQUEST für Parameter
+    - Server sendet REPLY
 - **Wiederverwenden**
-- Client schickt RENEW
-- Server REPLY mit Konfigparameter
+    - Client schickt RENEW
+    - Server REPLY mit Konfigparameter
 - **Gemeinsamkeiten zu DHCP**
-- automatische Konfiguration
-- lease und lease time identisch
-- Relay Agents werden benötigt
+    - automatische Konfiguration
+    - lease und lease time identisch
+    - Relay Agents werden benötigt
 - **Unterschiede**
-- RECONFIGURE
-    - Server sendet Information, dass der Client eine neue Adresse anfordern muss wegen NEUKONFIG
-- CONFIRM
-    - Client kann die Gültigkeit seiner Adressen überprüfen lassen
-- Authentifizierung von DHCPv6 Nachrichten möglich
-    - keine unauthorisierten DHCP Server
-    - nur authorisierte Clients werden bedient
-    - zw. Relay und Server wird IPSec genutzt
-    - Schutz der Daten mit Authentication-Option
+    - RECONFIGURE
+        - Server sendet Information, dass der Client eine neue Adresse anfordern muss wegen NEUKONFIG
+    - CONFIRM
+        - Client kann die Gültigkeit seiner Adressen überprüfen lassen
+    - Authentifizierung von DHCPv6 Nachrichten möglich
+        - keine unauthorisierten DHCP Server
+        - nur authorisierte Clients werden bedient
+        - zw. Relay und Server wird IPSec genutzt
+        - Schutz der Daten mit Authentication-Option
 
 ## Automatische Dienstkonfiguration
 - über Well-Known-Ports, DNS, DHCP, BC, MC, AC
