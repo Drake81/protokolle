@@ -44,12 +44,15 @@
     - Server senden ACK/NACK für IP des CLients
     - Client prüft mit ARP die Verfügbarkeit der IP
     - antwortet ein Host, dann schickt Client ein DECLINE an den Server
+
 - **Relay Agent**
     - übermittel DHCP Nachrichten in ein anderes Subnetz
     - ermöglicht den Betrieb eines DHCP Servers für mehrere Subnetze
+
 - **Scope**
     - stellt einen DHCP Bereich da
     - wird im Server konfiguriert
+
 - **lease**
     - stellt die Gültigkeitsdauer da, in der ein Gerät die zugewiesene Adresse nutzen kann
     - danach wird sie RELEASE zurückgegeben
@@ -74,19 +77,23 @@
 
 - dynamische Zuweisung der Netzconfig
 - UDP (Client 546, Server 547)
+
 - **Ablauf**
     - link local generieren (Unterschied zu DHCP)
     - SOLICIT an Multicast FF02::1:2
     - Server senden ADVERTISE
     - Client schickt an 1 Server einen REQUEST für Parameter
     - Server sendet REPLY
+
 - **Wiederverwenden**
     - Client schickt RENEW
     - Server REPLY mit Konfigparameter
+
 - **Gemeinsamkeiten zu DHCP**
     - automatische Konfiguration
     - lease und lease time identisch
     - Relay Agents werden benötigt
+
 - **Unterschiede**
     - RECONFIGURE
         - Server sendet Information, dass der Client eine neue Adresse anfordern muss wegen NEUKONFIG
@@ -124,7 +131,8 @@
 
 - Transmission Control Protocol
 - verbindungsorientiert, Duplex, E2E, L4
-- genutzt von: HTTP, Mail, SS FTP etc
+- genutzt von: HTTP, Mail, SFTP etc
+
 - **HEADER**
     - SRC Port 16bit
     - DEST Port 16bit
@@ -145,78 +153,89 @@
     - Urgent Pointer 16bit Zeigt auf dringende Daten (FLAG!)
     - Options 0-40B
     - Padding füllt Header auf 32bit grenze auf
+
 - **PORTS**
     - stellen Verbindung zu Anwendungen höherer Schichten dar
     - 0-1023: Well-Known-Ports
     - >1023 dynamische Zuweisung an Software
-    - Dienst/Port Zuweisung bei TCP und UDP gleich aber nicht immer von beiden verwendet
+    - Dienst/Port Zuweisung bei TCP und UDP gleich aber nicht immer von Beiden verwendet
 - jedes Paket wird mit ACK vom Empfänger bestätigt -> langsam und Zeit/Kapzität wird verschwendet (Halbduplex)
+
 - **Sliding Window**
     - Sendefenster gibt Anzahl der Datenpakete an(ohne ACK))
     - mehrere Segmente ohne ACK senden
     - Daten und ACK gleichzeitig (vollduplex)
     - ACK kann im Datensegment übertragen werden
     - Nachteil: ab fehlerhaften Segment werden die Daten neu übertragen
+
 - **Fast Retransmit**
-    - Empfänger besteht immer das zuletzt erwartet richtige Paket
+    - Empfänger besteht immer das zuletzt erwartet *richtige* Paket
     - erhält Sender 3mal die gleiche ACKNr sendet er das fehlende Paket nach
     - Nachteil: bei größerer Fehlersequenz muss für jedes Packet 3 ACKs abgewartet werden
+
 - **Selective ACK Options**
     - SACK Permitted Option beim Verbindungsaufbau
     - Gruppierung der ACK in "von bis" Gruppen mit den Sequenznummern
+
 - **Congestion Control**
     - Vermeidung von Überlast ("Stau")
-    - Steuerung durch Sender
-    - mittels Slow Start --> langsam vergrößern des congestion window mit jedem RTT inkrementieren
+    - Steuerung durch den Sender
+    - mittels Slow Start --> langsam vergrößern des *congestion window* mit jedem RTT inkrementieren
         - empfang von dACK Window wird halbiert
         - time out -> Slow Start wird neu begonnen
     - Nagle Algorithmus
         - kleine Segmente brauchen jedes mal ein ACK
         - große Segmente können ohne vorheriges ACK gesendet werden
-        - verhindert überflutung mit Header bei vielen kleinen Paketen
+        - verhindert Überflutung mit Header bei vielen kleinen Paketen
         - Nachteil: Anwendungen mit kleinen Paketen werden behindert (telnet ssh)
     - Silly Window Syndrome
         - verhindern von vielen ACK Paketen aufgrund sehr kleiner TCP Segmente
         - ACK wird gesendet, wenn 1 MSS(Maximum Segment Size) oder halber Empfangspuffer erreicht ist
         - Sender sendet, wenn 1MSS erreicht ist oder kein ACK erwartet wird
+
 - **Flow Control**
     - Empfänger teilt Sender die freie Größe des Buffers mit
     - Signalisierung im Window-Feld (TCP Header)
     - bei Window == 0 werden 1 Byte Daten gesendet bis Buffer wieder leer
-    - Persist Time wird bei jeder Zero Probe verdoppelt bis maximal 60sec
+    - Persist Time wird bei jeder *Zero Probe* verdoppelt bis maximal 60sec
+
 - **Sicherheit**
     - SYN FLOOD
         - viele Anfragen mit ggf falscher Senderadresse --> Speicherreservierung für SYN Anfragen --> kein Verbindung mehr möglich (DOS)
-        - Verwendung eines SYN Cookie --> IP, Port, TimeStamp etc
+        - Vermeidung: Verwendung eines SYN Cookie --> IP, Port, TimeStamp etc
     - Spoofing
         - einbringen falscher Pakete durch erraten der Sequenznummern
-        - MD5, Timestamp, andere Protokolle SCTP DCCP
+        - Vermeidung: MD5, Timestamp, oder andere Protokolle wie SCTP und DCCP
     - Fingerprint
         - Betriebssystemermittlung aus TCP Daten mit nmap
         - für Angriffe auf das OS
-        - Fingerprint verwischen/fälschen
+        - Vermeidung: Fingerprint verwischen/fälschen
 
 ## UDP 
 
 - verbindungslos
-- Nachteile:
-    - ungesicherte Übertragung
-    - keine Flusskontrolle
-    - kein Congestion Control
-- Vorteile:
-    - schnelle Übermittlung, da kein Verbindungsaufbau
-    - wenig Overhead
-    - kein Retransmit (Echtzeitanwendung)
-- Header:
+
+- **Header:**
     - Source Port 16bit
     - Dest Port 16bit
     - Length 16bit
     - Checksum 16bit
 
+- **Nachteile:**
+    - ungesicherte Übertragung
+    - keine Flusskontrolle
+    - kein Congestion Control
+
+- **Vorteile:**
+    - schnelle Übermittlung, da kein Verbindungsaufbau
+    - wenig Overhead
+    - kein Retransmit (Echtzeitanwendung)
+
 ## SCTP
 
 - Stream Control Transmission Protocol
-- verbindungsorientiert, Multihoming,
+- verbindungsorientiert
+- unterstützt Multihoming
 - Common Header
     - SRC Port 16bit
     - DEST Port 16 bit
@@ -228,27 +247,27 @@
     - Length 16bit -> 4Byte Header + Value
     - Value 32bit
 - Assoziation
-    - SCTP Verbindung wird Assoziation genannt
+    - SCTP Verbindung wird *Assoziation* genannt
     - Charakterisiert durch:
         - SRC/DEST Port/IP
         - mehrere IPs aber nur ein Port Paar
-    - etabliert durch 4 Way Handshake
+    - etabliert durch *four way handshake*
         - INIT(VTAG)
         - INIT ACK(VTAG, Cookie)
         - Cookie Echoed
         - Cookie ACK
-    - shutdown durch three way Handshake
+    - shutdown durch *Three way handshake*
         - SHUTDOWN
         - SHUTDOWN ACK
         - SHUTDOWN COMPLETE
-    - abbruch mit abourt chunk (TCP-Reset)
+    - Abbruch mit *abort chunk* (TCP-Reset)
 - Stream
     - unidirektionale Verbindung
-    - Anzahlfestlegung beim Aufbau
-    - Streams einer Assoziation beeinflussen einander NICHT!!!
+    - Festlegung der Streamanzahl beim Aufbau
+    - Streams einer Assoziation beeinflussen einander *NICHT*!!!
     - Multistreaming möglich
 - Multihoming
-    - Anbindung über n IPs möglich
+    - Anbindung über n verschiedene IPs möglich
     - Festlegung eines primären Pfades
     - Alternative Pfade nur bei Datenverlust nutzbar
     - Stream ACK SACK über den Streamkanal
@@ -305,6 +324,7 @@
     - Zugangskontrollsystem für Ressourcen und Dienste (WLAN-AP)
 - Policie -> wer(Nutzer/Gruppe) darf was(Ressourcen/Dienste) wann(Zeit/Zutrittsbedingung) wielange(Zeit/Volumenbegrenzung) benutzen....
 - ACL -> Rechtevergabe für Ressourcen und Dienste
+
 - **Komponenten**
     - Rule Based Engine -> Trennen von generischen und Dienstspezifischen Informationen
     - Application Specific Module -> Anpassung an konkrete Anwendung
@@ -339,34 +359,40 @@
 - UDP
 - Client Server Modell
 - speichert Nutzerdaten
+
 - **Header**
-    - Code 8bit -> Nachrichtentyp (Access[Request, Response, Reject, Challenge], Accounting[Request, Response])
+    - Code 8bit -> Nachrichtentypen
+        - Access (Request, Response, Reject, Challenge)
+        - Accounting (Request, Response)
     - Identifier 8bit -> Zuordnung von Request/Response
-    - Length 16bit -> laenge des kompletten Packets
+    - Length 16bit -> Länge des kompletten Packets
     - Authenticator 16Byte -> zum Verifizieren  (Zufallswert und MD5) zwischen Client/NAS und Server
     - Attributes 
         - Nutzdaten (AAA Daten)
         - TLV Format
+
 - **Authentification**
     - PAP
-        - Password Authentication Protocol
+        - *Password Authentication Protocol*
         - Klartext
         - über das PPP Verfahren
         - Signalisierung für PAP, dass USER Name und PW gleich übertragen werden
     - CHAP
-        - Challenge Handshake Authentication Protocol
+        - *Challenge Handshake Authentication Protocol*
         - Client zu NAS REQU
         - NAS schickt RESP mit Challenge
         - Client zu NAS: REQU mit CHAP-ID (Zufallswert,ID,Passwort mit MD5) und USER Name
         - NAS zu RADIUS: Access REQU (CHAP PW, UserName, CHAP Challenge)
         - RADIUS: Accept, Reject zu NAS
     - EAP -> Extensible Authentication Protocol
+
 - **Accounting**
     - Accounting wird nach Authentifizierung gestartet von NAS
     - ACC Requ mit Status Type(Start) und Session-ID
     - Resp als Bestätigung
     - REQU Type(Interim Update, SID, Acc Daten) -> Übermittlung von Abbrechnungsdaten während der Nutzung
     - REQU(STOP, SID, Acc-Daten) -> Beenden und Übermittlung der gesammelten Daten
+
 - **Proxy**
     - zwischengeschalteter Proxy der als Vermittler fungiert
     - fügt/entfernt Proxy Attribute
@@ -377,11 +403,13 @@
 - TCP, SCTP
 - Peer to Peer Protocol (jeder kann Nachrichten senden)
 - Hop by Hop und End to End Security
+
 - **Base Protocol Funktionen**
     - Übertragung Attribut Value Paare
     - Fähigkeiten aushandeln
     - Fehler Erkennung
     - Basic Services (Session Handling, Accounting, Sicherheit, Proxy)
+
 - **Header**
     - Version 8bit -> zwangsweise 1
     - Msg Length 24bit -> Länge Header + Body
@@ -395,19 +423,23 @@
     - Application ID 32bit -> Zuordnung auf Anwendung
     - Hop by Hop ID 32bit -> wird durch Proxy etc geändert
     - End to End ID 32bit -> eindeutig bis zum bittere ende
+
 - **Peer Connection**
     - zwischen 2 Peers genau eine permanente TCP oder SCTP Verbindung
     - mehrere Sessions möglich
+
 - **Capabilities Exchange
     - erfolgt nach Verbindungsaufbau
     - Identitäten der anderen Peers feststellen
     - austausch der Fähigkeiten: Protokollversion, Diameter Applicationen, Sicherheitsmechanismen
     - Verbindungsaufbau wird abgebrochen, falls Applicationen und Sicherheitsmechanismen nicht unterstützt werden
+
 - **Watchdog**
     - Heartbeat zur aktiven Überwachung der Connectivity
     - mittels Device Watchdog Request DWR
     - bleibt Device Watchdog Answer DWA aus, wird auf secondary Peer umgeschaltet
     - DWR Zeitintervall wird manuell festgelegt
+
 - **Agenten**
     - Relay Agent -> routen von Diameter Nachrichten zwischen Peers
     - Proxy -> routen und verändern anhand von Policies
@@ -438,11 +470,13 @@
     - Datenübertragung (Timer, Retransmission)
     - Nutzer Identifikation
     - Auswahl Authentifizierungsverfahren
+
 - **Header**
     - Code 8bit -> Nachrichten Msg (Requ, Resp, Success, Failure)
     - Identifier 8bit
     - Length 32bit
     - Type 8bit -> gibt die Unterabfrage an, was gerade gefordert/geschickt wird (Identity, Notification, NACK, MD5 Challenge…)
+
 - **Authentifizierung**
     - Supplicant startet mit EAPOL-Start
     - Authenticator erfragt Identitaet (Nutzernamen) -> Type 1
@@ -450,14 +484,17 @@
     - Authenticator startet Authentifizierung und schickt MD5 Challenge
     - Supplicant erfüllt Challenge oder schickt NACK mit anderem Verfahrensvorschlag
     - Authenticator wählt aus und startet Authentifizierung erneut
+
 - **PEAP**
     - Protected EAP
     - TLS Tunnel zu beginn
         -> Identitaet wird geschützt
     - danach EAP Ablauf
+
 - **EAP-TLS**
     - Zertifikatsbasierte Authentifizierung
     - kein Identitätsschutz
+
 - **EAP-TTLS**
     - EAP -Tunneling TLS
     - Authentifizierung erfolgt dann mit EAP oder PAP/CHAP/MSCHAP
