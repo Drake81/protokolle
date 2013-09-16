@@ -269,7 +269,7 @@
 - Multihoming
     - Anbindung über n verschiedene IPs möglich
     - Festlegung eines primären Pfades
-    - Alternative Pfade nur bei Datenverlust nutzbar
+    - Alternative Pfade werden bei Datenverlust genutzt sowie auf USER/Programm Befehl
     - Stream ACK SACK über den Streamkanal
 - HEARTBEAT
     - periodisches Überprüfen des Pfadzustandes
