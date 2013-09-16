@@ -522,10 +522,155 @@ Ziel: *Formale Beschreibung von Telekommunikationssystemen*
         * Interpretation als ASM-Kode
         * SDL-to-ASM-Compiler
 
-### MSC - Message Sequence Charts
+### MSC - Message Sequence Charts 
+
+* Dient der Visualisierung/Darstellung von Kommunikationabläufen in Systemen.
+* ursprünglich *nicht* als FDT konzipiert
+* Stellt *Interaktionen* zwischen Komponenten eines Systems sowie der Umgebung dar
+* Integration in UML-2
+* über Sequenzdiagramme
+* Nicht an eine bestimmte Spezifikationssprache gebunden
+* bevorzugt aber im Umfeld von *SDL* genutzt
+
+* **Anwendungen**
+* Entwurf von Kommunikationabläufen
+* Dokumentation
+* Testfallbeschreibung
+
+* **MSC unterstützt:**
+* formale Semantik (Prozessalgebren)
+* High-level MSC (HMSC)
+* Datentypen
+* entfernte Methodenaufrufe
+* Objekt-Orientierung
+
+* **MSC-Notationen**
+* MSC/GR - graphische Notation
+* MSC/PR - textuelle Notation
+
+* **Grundelemente**
+* Instanzen - Systemkomponenten
+* Nachrichten - Interaktion
+
+* **Zeit im MSC**
+* entlang der Instanzachse schreitet die Zeit voran
+    * es entsteht eine zeitliche Ordnung
+* Senden und Empfangen sind asynchrone Ereignisse
+
+* **Darstellungsmöglickeiten in Bezug auf Nachrichten**
+* Überholen von Nachrichten
+* Verlust von Nachrichten
+* Finden von Nachrichten
+
+* **Verfügbare Timerarten**
+* Start Timer
+* Stop/Reset Timer
+* Timeout
+
+* **Bedingungen**
+* Beschreiben Systemzustände oder Vorbedingungen
+
+* **Systemzustände**
+* shared all - globale Zustände für alle Instanzen
+    * Können in verschiedenen MSCs enthalten sein!
+* shared - Zustände die nur *einige* Instanzen
+* lokale Zustände
+
+* **Inline-Ausdrücke**
+* loop - Zyklen
+* opt - wahlweise Ausführung
+* exc - Ausnahmebehandlung
+* alt - Ausführungsalternativen
+* par - parallele Ausführung
+
+* **High-level MSC**
+* Kombination von MSC zu komplexeren Beschreibungen
+* Referenzen auf MSC
+* Start/Stopp-Symbole
+
+### ASN.1 - Abstract Sytanx Notation One
+
+* *Unabhängig von der FDT-Entwicklung* hat sich ASN.1 als Beschreibungssprache für Datenformate in der Telekommunikation durchgesetzt
+* flexibler
+* weniger aufwendig
+* ISO/ITU Standard
+* es sind zahlreiche Serialisierungsregeln definiert
+* häufig eingesetzt im Protocol Engineering (X.500, LDAP, GSM, UMTS, etc.)
+* es gibt grafische ASN.1 Editoren und APIs/Toolkits/Compiler
 
 
+* **Ziele**
+* Beschreibung von Datenformaten
+* Genutzt bei DNS und Netzmanagment
 
+* **Verschiedene Serialisierungsregeln**
+* Verschiedene Basic Encoding Rules (BER)
+* Canonical Encoding Rules (CER)
+* Distinguished Encoding Rules (DER)
+* Packed Encoding Rules (PER)
+* XML Encoding Rules (XER)
+* Generic String Encoding Rules (GSER)
+
+* **Datentypen**
+* *atomic-types*
+    * boolean
+    * integer
+    * enumerated
+    * real
+    * bit string
+    * octet string
+    * null
+    * printable string
+    * utf8-string
+* *structered-types* - (aus atomic-types zusammengesetzt)
+    * SEQUENCE 
+    * SEQUENCE OF
+    * SET
+    * SEt OF
+    * CHOICE
+
+* **BER**
+* Basieren auf TVL-Kodierung
+* TVL: Type Length Value
+
+### Probleme formaler Beschreibungstechniken
+
+* Protokolle werden meistens ad hoc entworfen,
+* selten formal beschrieben,
+* formale Beschreibungen werden meistens nur ergänzend genutzt.
+
+* **Gründe für den begrenzten Einsatz formaler Beschreibungstechniken**
+    * Nutzerakzeptanz
+        * Nutzen formaler Techniken nicht ausreichend sichtbar
+        * hoher Zeitdruck verhindert Einarbeitung
+        * hoher Aufwand für Entwicklung, Validation von Spezifikationen
+        * mangelnde Werkzeugunterstützung
+        * unzureichende Effizienz generierter Implementierungen
+    * Einarbeitungsaufwand
+        * Einarbeitung in Sprache und semantisches Modell erforderlich
+    * Entwicklungsaufwand
+        * Entwicklungsaufwand formaler Beschreibungen auf der Grundlage informaler Beschreibungen ist beträchtlich
+        * Umfang: 2000 – 10000 Zeilen
+    * **Techniken mit graphischer Präsentation (SDL, MSC, UML)**
+    * Verfügbarkeit anwendbarer Werkzeuge
+        * noch keine ausreichende Werkzeugunterstützung
+        * Prototypen vor allem im akademischen Umfeld
+        * hoher Einarbeitungsaufwand
+        * fehlende Unterstützung des gesamten Entwicklungsprozesses
+    * Durchgängigkeit der Techniken
+        * i.d.R. keine durchgängige Unterstützung des gesamten Protokoll- entwicklungsprozesses
+        * viele Validationstools erfordern spezifische Eingabenotationen
+    * zweimalige „Beschreibung“ der Protokolle
+        * Spezifikation + Kodierung --> zu aufwendig
+    * Fehlen einer Methodik
+        * methodischer Rahmen für eine FDT-basierte Protokollentwicklung
+        * analog OSI-Testmethodologie
+        * Bewertungsmetriken
+    * Verfügbarkeit formaler Beschreibungen
+        * nur wenige formale Beschreibungen, insbesondere von Internet- Protokollen
+        * Spezifikationen häufig erst nach den ersten Implementierungen verfügbar
+        * häufig im akademischen Umfeld entstanden
+        * wenn formale Spezifikationen verfügbar, dann nur als Komplement zur informalen Spezifikation
 
 # Entwicklung
 
