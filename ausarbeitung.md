@@ -504,4 +504,37 @@
 
 - zur Authentifizierung in Layer 2 Netzen
 - portbasierte Authentifizierung
-- 
+- EAP Authentifizierung vorgeschrieben
+- **Sicherheitsanforderungen**
+    - Integrität
+    - Replayschutz
+    - Wörterbuchattacken
+    - Session Unabhängigkeit
+    - uvm.
+- **Port Access Entity**
+- Authentifizierung am Netzwerkport
+- besitzt Lower/Upper Layer 
+- Supplicant/Authenticator auf upper layer
+- Port Access Control Protocol -> Verbindung zum upper Layer
+- **Port-Types**
+    - uncontrolled Port -> empfangen und senden von Auth.-Frames
+    - controlled Port
+        - Zutrittskontrolle durch PAE im uncontrolled Port
+        - Stati -> authorized(802.1X deaktiviert), unauthorized(Port deaktiviert), auto(PAE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
