@@ -633,6 +633,45 @@ Ziel: *Formale Beschreibung von Telekommunikationssystemen*
 * Basieren auf TVL-Kodierung
 * TVL: Type Length Value
 
+### Probleme formaler Beschreibungstechniken
+
+* Protokolle werden meistens ad hoc entworfen,
+* selten formal beschrieben,
+* formale Beschreibungen werden meistens nur ergänzend genutzt.
+
+* **Gründe für den begrenzten Einsatz formaler Beschreibungstechniken**
+    * Nutzerakzeptanz
+        * Nutzen formaler Techniken nicht ausreichend sichtbar
+        * hoher Zeitdruck verhindert Einarbeitung
+        * hoher Aufwand für Entwicklung, Validation von Spezifikationen
+        * mangelnde Werkzeugunterstützung
+        * unzureichende Effizienz generierter Implementierungen
+    * Einarbeitungsaufwand
+        * Einarbeitung in Sprache und semantisches Modell erforderlich
+    * Entwicklungsaufwand
+        * Entwicklungsaufwand formaler Beschreibungen auf der Grundlage informaler Beschreibungen ist beträchtlich
+        * Umfang: 2000 – 10000 Zeilen
+    * **Techniken mit graphischer Präsentation (SDL, MSC, UML)**
+    * Verfügbarkeit anwendbarer Werkzeuge
+        * noch keine ausreichende Werkzeugunterstützung
+        * Prototypen vor allem im akademischen Umfeld
+        * hoher Einarbeitungsaufwand
+        * fehlende Unterstützung des gesamten Entwicklungsprozesses
+    * Durchgängigkeit der Techniken
+        * i.d.R. keine durchgängige Unterstützung des gesamten Protokoll- entwicklungsprozesses
+        * viele Validationstools erfordern spezifische Eingabenotationen
+    * zweimalige „Beschreibung“ der Protokolle
+        * Spezifikation + Kodierung --> zu aufwendig
+    * Fehlen einer Methodik
+        * methodischer Rahmen für eine FDT-basierte Protokollentwicklung
+        * analog OSI-Testmethodologie
+        * Bewertungsmetriken
+    * Verfügbarkeit formaler Beschreibungen
+        * nur wenige formale Beschreibungen, insbesondere von Internet- Protokollen
+        * Spezifikationen häufig erst nach den ersten Implementierungen verfügbar
+        * häufig im akademischen Umfeld entstanden
+        * wenn formale Spezifikationen verfügbar, dann nur als Komplement zur informalen Spezifikation
+
 # Entwicklung
 
 # Entwurf
