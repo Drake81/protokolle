@@ -701,9 +701,8 @@ realisiert. - Kommunikationsoftware
     * Prüft, ob der Entwurf angestrebten Leistungsvorgaben, z. B.  bezüglich der Dienstgüte, gerecht werden kann
     * Finden von Schwachstellen im Implementierungsentwurf
 
-
 * **Implementierung**
-    * Abbildung der Dienst- und Protokollspezifikation in die Zielum- gebung
+    * Abbildung der Dienst- und Protokollspezifikation in die Zielumgebung
     * Erarbeitung einer Implementierungsspezifikation
 
 * **Test**
@@ -719,7 +718,7 @@ realisiert. - Kommunikationsoftware
 
 * **Installation/Integration**
     * *sudo apt-get install myprotocol*
-    * USE IT, BITCH!
+    * USE IT, BITCH!1ELEVEN
 
 ## Besonderheiten der Protokollentwicklung
 
@@ -745,7 +744,11 @@ realisiert. - Kommunikationsoftware
             * Anforderungen des Zielsystems / Ablaufumgebung
             * Auswahl von Protokolloptionen
 
-## Entwurf
+## ProtokollEntwurf
+
+* Adhoc-Protokollentwurf
+    * in der Praxis vorwiegend praktiziert
+        * weil kaum praktikablen systematischen Methoden
 
 
 # Entwurf
