@@ -528,67 +528,110 @@ Ziel: *Formale Beschreibung von Telekommunikationssystemen*
 * ursprünglich *nicht* als FDT konzipiert
 * Stellt *Interaktionen* zwischen Komponenten eines Systems sowie der Umgebung dar
 * Integration in UML-2
-    * über Sequenzdiagramme
+* über Sequenzdiagramme
 * Nicht an eine bestimmte Spezifikationssprache gebunden
-    * bevorzugt aber im Umfeld von *SDL* genutzt
+* bevorzugt aber im Umfeld von *SDL* genutzt
 
 * **Anwendungen**
-    * Entwurf von Kommunikationabläufen
-    * Dokumentation
-    * Testfallbeschreibung
+* Entwurf von Kommunikationabläufen
+* Dokumentation
+* Testfallbeschreibung
 
 * **MSC unterstützt:**
-    * formale Semantik (Prozessalgebren)
-    * High-level MSC (HMSC)
-    * Datentypen
-    * entfernte Methodenaufrufe
-    * Objekt-Orientierung
+* formale Semantik (Prozessalgebren)
+* High-level MSC (HMSC)
+* Datentypen
+* entfernte Methodenaufrufe
+* Objekt-Orientierung
 
 * **MSC-Notationen**
-    * MSC/GR - graphische Notation
-    * MSC/PR - textuelle Notation
+* MSC/GR - graphische Notation
+* MSC/PR - textuelle Notation
 
 * **Grundelemente**
-    * Instanzen - Systemkomponenten
-    * Nachrichten - Interaktion
+* Instanzen - Systemkomponenten
+* Nachrichten - Interaktion
 
 * **Zeit im MSC**
-    * entlang der Instanzachse schreitet die Zeit voran
-        * es entsteht eine zeitliche Ordnung
-    * Senden und Empfangen sind asynchrone Ereignisse
+* entlang der Instanzachse schreitet die Zeit voran
+    * es entsteht eine zeitliche Ordnung
+* Senden und Empfangen sind asynchrone Ereignisse
 
 * **Darstellungsmöglickeiten in Bezug auf Nachrichten**
-    * Überholen von Nachrichten
-    * Verlust von Nachrichten
-    * Finden von Nachrichten
+* Überholen von Nachrichten
+* Verlust von Nachrichten
+* Finden von Nachrichten
 
 * **Verfügbare Timerarten**
-    * Start Timer
-    * Stop/Reset Timer
-    * Timeout
+* Start Timer
+* Stop/Reset Timer
+* Timeout
 
 * **Bedingungen**
-    * Beschreiben Systemzustände oder Vorbedingungen
+* Beschreiben Systemzustände oder Vorbedingungen
 
 * **Systemzustände**
-    * shared all - globale Zustände für alle Instanzen
-        * Können in verschiedenen MSCs enthalten sein!
-    * shared - Zustände die nur *einige* Instanzen
-    * lokale Zustände
+* shared all - globale Zustände für alle Instanzen
+    * Können in verschiedenen MSCs enthalten sein!
+* shared - Zustände die nur *einige* Instanzen
+* lokale Zustände
 
 * **Inline-Ausdrücke**
-    * loop - Zyklen
-    * opt - wahlweise Ausführung
-    * exc - Ausnahmebehandlung
-    * alt - Ausführungsalternativen
-    * par - parallele Ausführung
+* loop - Zyklen
+* opt - wahlweise Ausführung
+* exc - Ausnahmebehandlung
+* alt - Ausführungsalternativen
+* par - parallele Ausführung
 
 * **High-level MSC**
-    * Kombination von MSC zu komplexeren Beschreibungen
-    * Referenzen auf MSC
-    * Start/Stopp-Symbole
+* Kombination von MSC zu komplexeren Beschreibungen
+* Referenzen auf MSC
+* Start/Stopp-Symbole
 
 ### ASN.1 - Abstract Sytanx Notation One
+
+* *Unabhängig von der FDT-Entwicklung* hat sich ASN.1 als Beschreibungssprache für Datenformate in der Telekommunikation durchgesetzt
+* flexibler
+* weniger aufwendig
+* ISO/ITU Standard
+* es sind zahlreiche Serialisierungsregeln definiert
+* häufig eingesetzt im Protocol Engineering (X.500, LDAP, GSM, UMTS, etc.)
+* es gibt grafische ASN.1 Editoren und APIs/Toolkits/Compiler
+
+
+* **Ziele**
+* Beschreibung von Datenformaten
+* Genutzt bei DNS und Netzmanagment
+
+* **Verschiedene Serialisierungsregeln**
+* Verschiedene Basic Encoding Rules (BER)
+* Canonical Encoding Rules (CER)
+* Distinguished Encoding Rules (DER)
+* Packed Encoding Rules (PER)
+* XML Encoding Rules (XER)
+* Generic String Encoding Rules (GSER)
+
+* **Datentypen**
+* *atomic-types*
+    * boolean
+    * integer
+    * enumerated
+    * real
+    * bit string
+    * octet string
+    * null
+    * printable string
+    * utf8-string
+* *structered-types* - (aus atomic-types zusammengesetzt)
+    * SEQUENCE 
+    * SEQUENCE OF
+    * SET
+    * SEt OF
+    * CHOICE
+
+* **BER**
+* Basieren auf TVL-Kodierung
+* TVL: Type Length Value
 
 # Entwicklung
 
