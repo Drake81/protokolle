@@ -11,21 +11,6 @@ Ziel: Ingenieurmäßige Entwicklung von Kommunikationssoftware
     * Einfluss der Standardisierung
     * mehrfache Implementierung der Protokolle
 
-* **Einteilung in mehrere Schritte**
-    * Anforderungsanlyse
-        * Anforderungsspezifiaktion
-    * Dienst u. Protokollentwurf
-        * Dienst u. Protokollspezifikation
-    * Protokollverfikation
-        * verfizierte Spezifikation
-    * Leistungsvorhersage
-        * optimierter Entwurf
-    * Implementierung
-        * Kode
-    * Test
-        * getestete Kommunikationsoftware
-    * Installation/Integration
-
 * **Interne Ereignisse**
     * Innerhalb des Protokolles oder Dienstes auftretende Ereignisse die von außen nicht sichbar sind.
     * z.b. Fehler wie: Verbindungsabbruch (entspricht einer spontanen Transition in einem Zustansautomaten)
@@ -673,6 +658,95 @@ Ziel: *Formale Beschreibung von Telekommunikationssystemen*
         * wenn formale Spezifikationen verfügbar, dann nur als Komplement zur informalen Spezifikation
 
 # Entwicklung
+
+## Entwicklungschritte
+
+* Kommunikationsprotokolle werden zum größten Teil in Software
+realisiert. - Kommunikationsoftware
+* Protokollentwicklung entspricht im Kern der Softwareentwicklung
+    * ABER: einige wichtige Unterschiede
+
+* **Einteilung in mehrere Schritte - Wasserfallmodell**
+    * Anforderungsanlyse
+        * Anforderungsspezifiaktion
+    * Dienst u. Protokollentwurf
+        * Dienst u. Protokollspezifikation
+    * Protokollverfikation
+        * verfizierte Spezifikation
+    * Leistungsvorhersage
+        * optimierter Entwurf
+    * Implementierung
+        * Kode
+    * Test
+        * getestete Kommunikationsoftware
+    * Installation/Integration
+
+* **Anforderungsanlyse**
+    * Spezifikation der Anforderungen an das Protokoll
+    * meistens informal
+    * häufig Berücksichtigung verschiedener (Firmen-) Interessen
+
+* **Dienst u. Protokollentwurf**
+    * 2 Schritte im Idealfall
+        * Entwurf des Dienstes - nicht immer explizit ausgeführt
+    * Entwurf des Protokolls
+
+* **Protokollverfikation**
+    * überprüft die funktionale Korrektheit des Entwurfs
+        * Wird der spezifizierte Dienst wirklich erbracht ?
+        * Widerspruchfreiheit des Entwurfs
+    * *Programmverifikation/Konsistenzprüfungen in der Praxis kaum genutzt!!*
+
+* **Leistungsvorhersage**
+    * Prüft, ob der Entwurf angestrebten Leistungsvorgaben, z. B.  bezüglich der Dienstgüte, gerecht werden kann
+    * Finden von Schwachstellen im Implementierungsentwurf
+
+
+* **Implementierung**
+    * Abbildung der Dienst- und Protokollspezifikation in die Zielum- gebung
+    * Erarbeitung einer Implementierungsspezifikation
+
+* **Test**
+    * Konformitätstest
+        * Übereinstimmung einer Implementierung mit der Spezifikation
+        * Zertifizierung
+    * Interoperabilitätstest
+        * Zusammenarbeitsfähigkeit von Implementierungen
+    * Leistungstest
+        * Einhaltung von Leistungsvorgaben
+    * Robustheitstest
+        * Verhalten der Implementierung bei fehlerhaften Eingaben
+
+* **Installation/Integration**
+    * *sudo apt-get install myprotocol*
+    * USE IT, BITCH!
+
+## Besonderheiten der Protokollentwicklung
+
+* mehrere Spezifikationsebenen
+* spezifische Protokollverifikation
+* Rolle der Standardisierung
+    * Notwendigkeit Konformitätstest
+* mehrfache Implementierung
+    * Implementierungsspezifikation
+    * Notwendigkeit eines Interoperabilitätstest
+
+* **Spezifikationsebenen**
+    * Dienstspezifikation
+        * „Was“-Spezifikation
+        * entspricht der Anforderungsspezifikation der Softwareentwicklung
+    * Protokollspezifikation
+        * „Wie“-Spezifikation
+        * abstrakte Implementierung der Dienstspezifikation
+        * erforderlich wegen mehrfache Protokollimplementierungen
+        * Spezifikation von Protokolloptionen
+    * Implementierungsspezifikation
+        * bedingt durch Implementierungsunabhängigkeit der Protokollspezifikation
+            * Anforderungen des Zielsystems / Ablaufumgebung
+            * Auswahl von Protokolloptionen
+
+## Entwurf
+
 
 # Entwurf
 
