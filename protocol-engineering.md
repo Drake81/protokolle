@@ -820,6 +820,88 @@ Unter Prototyping versteht das Ausführbarmachen der Spezifikation zu Validation
 
 **Prototyping ist die am meisten genutzte Validationsmethode in der praktischen Protokollentwicklung !!!**
 
+## Formen der Protokollverifikation
+
+### Verifikation der allgemeinen Eigenschaften
+* Überprüfung von Eigenschaften, welche erfüllt sein müssen
+    * vor allem Lebendigkeitseigenschaften
+    * zielt vor allem auf die Konsistenz und Vollständigkeit des Entwurfs
+
+### Verifikation der speziellen Eigenschaften
+* Eigenschaften, die durch die Semantik des Protokolls bestimmt sind
+    * insbesondere Sicherheitseigenschaften
+    * prüft ob der Protokollentwurf den spez. Dienst auch wirklich erbringt
+
+## Wichtige Protokolleigenschaften
+
+Eigenschaft                                   | Erklärung
+----------------------------------------------|----------
+keine nicht ausführbaren Aktionen             | Protokoll enthält *keine* Aktionen die *nie zur Ausführung* kommen.
+Deadlock-Freiheit                             | Protokoll gelangt *nie* in einen Zustand den *nicht mehr verlassen* kann.
+Livelock-Freiheit                             | Protokoll gelangt *nie* in einen Zustand dem *unproduktive Zyklen* ausgeführt werden.
+Fehlertoleranz und Resynchronisation          | Protokoll kehrt nach einem Fehler oder einer abnormalen Situation in einen Zustand zurück, von dem aus es den Ablauf fortsetzen kann.
+Vollständigkeit                               | Protokoll enthält keine nichtspezifizierten Ereignisse, d.h. alle Ereignisse sind erfasst.
+Terminierung                                  | Protokoll erreicht immer den/die Endzustände; bei zyklischen Protokollen einen Anfangszustand.
+
+## Verifikationsmethoden
+
+* **Modellbasierte Verifikation**
+    * Überprüft die Korrektheit, Vollständigkeit und Konsistenz der Spezifikation durch Beweistechniken, über semantischen Modell.
+        * Erreichbarkeitsanalyse
+        * statische und dynamische Analyse von Petri-Netzen
+
+* **Deduktive Verifikation**
+    * Basiert auf Nutzung von Axiomen und Interferenzregeln. Nutzen Syntax der Beschreibungstechnik als formale Basis, was syntaktisch Schlussfolgerungen über die Korrektheit der Spezifikation zulässt.
+        * temporallogisches Schließen
+
+* **Hybride Techniken**
+    * Versucht Vorteile zu kombinieren.
+        * Model Checking
+
+* **Manuelle Techniken**
+    * Beweistechniken, um z. B. Protokollinvarianten zu überprüfen
+        * Einhaltung von Nachrichtenfolgen
+        * Puffergrenzen
+    * aufwendig, langwierig und selbst sehr fehleranfällig
+    * **praktisch kaum genutzt !!!**
+
+## Erreicharkeitsanalyse
+
+Unter Erreichbarkeitsanalyse wird die vollständige Untersuchung aller erreichbaren Zustände und Transitionen der durch die FSM beschriebeneno Protokollinstanz verstanden.
+
+* am häufigsten genutzte Verifikationstechnik für FSM/EFSM- basierte Protokollbeschreibungen
+* Erzeugung eines *Zustandsraums* der Instanz, der alle erreichbaren Zustände umfasst
+* *Erreichbarkeitsgraph:* Graph, der ausgehend vom Initialzustand der Protokollinstanz alle erreichbaren Zustände und Zustandsübergänge enthält
+* Die Erreichbarkeitsanalyse besteht aus zwei Schritten
+    * Erzeugung des Erreichbarkeitsgraphen
+    * Analyse seiner Eigenschaften
+* Zwei Vorgehensweisen
+    * vollständige Erzeugung des Graphen mit anschließender Analyse
+    * On the fly –Techniken
+        * verbinden Erzeugung des Graphen mit der Analyse von Eigenschaften
+        * brechen die Analyse ab, wenn Fehler entdeckt werden
+        * vermeiden das Abspeichern einer Vielzahl von Zuständen
+
+### Ziele
+
+Ziel der Erreichbarkeitsanalyse ist es zu untersuchen, ob jeder Zustand des Protokolls erreicht wird und die Ausführungspfade dahin die geforderten Korrektheits-, Vollständigkeits- und Konsistenzkriterien erfüllen.
+
+* Die Erreichbarkeitsanalyse unterstützt die:
+    * Verifikation allgemeiner Eigenschaften
+    * Verifikation spezieller Eigenschaften
+
+## Zustandsraumexplosion
+
+Die analysierten Zustände müssen bei der Erreichbarkeitsanalyse abge- speichert werden.
+
+* Unterstützung Backtracking
+* Vergleich von Zuständen, um Mehrfachanalysen zu vermeiden
+
+* Großer Speicherplatzbedarf !!!
+    * besonders bei EFSM; bei Automaten mit mehren Teilautomaten (Interleaving)
+
+* Zustandsraumexplosion
+    * 10^9 Zustände selbst bei kleinen Protokollen !
 
 
 # Implementierung
