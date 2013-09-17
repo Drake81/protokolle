@@ -156,11 +156,66 @@
 
 ## Allgemein
 
+- elektronischer Nachrichtendienst
+- asynchrone Kommunikation
+    - Sender/Empfänger müssen nicht gleichzeitig online sein
+- 1:n Kommunikation
+- Ortsunabhängig
+- **Struktur**
+    - MUA - Mail User Agent -> Darstellung der Mail, nutzt MTA zum versenden/empfangen (Mutt, Outlook)
+    - MTA - Mail Transfer Agent -> Zwischenspeichern und weiterleiten an andere MTA's (fetchmail)
+- **Protokolle**
+    - SMTP -> versenden vom Client zum Server
+    - IMAP, POP3 -> abholen vom Server zum MUA
+- 7 Bit ASCII Format
+- Zeilenbasiert (CRLF am Ende jeder Zeiler)
+- Format:
+    - Header -> Steuerinformationen
+        - als Typ:Wert Paar CRLF
+        - FROM
+        - REPLY TO
+        - TO
+        - CC
+        - BCC
+        - Subject
+        - Date
+        - Comments
+        - Keywords
+        - Received
+        - Return_Path
+        - MessageID
+        - InReplyTo
+        - X-..... -> eigener Header
+    - Leerzeile
+    - Body -> ende mit CRLF . CRLF
+
 ## MIME
+
+- Multipurpose Internet Mail Extension
+- ermöglicht Media Types in Email
+- Layer 6
+- Textbasiert
+- **Struktur**
+    - discrete Media -> nur 1 Medientyp
+    - composite Media -> mehrere Mediendaten in einer MIME Nachricht
+- **Header**
+    - MIME-Version: 1.0
+    - Content-Type: multipart/mixed... 
+    - Content-Transfer-Encoding: 7bit, base84
+    - boundary: grenzen der MIME Message
+- **Body**
+    - Content-Type:
+    - Content-Transfer-Encoding
+- **Types**
+    - angabe der Medientypen
+    - text, image, video, audio...
+
 
 ## Base64
 
 ## SMTP
+
+
 
 ## POP3
 
