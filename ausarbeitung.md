@@ -340,7 +340,8 @@
     - Service Equipment
         - Hardware mit bestimmten Service
         - von ASM gesteuert
-- Modelle
+
+- **Modelle**
     - Systemaufteilung:
         - Single Domain -> Service und AAA auf einem System/Gerät
         - Roaming -> Service und AAA auf verschiedenen Systemen/Geräte
@@ -348,7 +349,8 @@
         - Agent Sequenz -> AAA funktioniert als Vermittler, alle Anfragen laufen über diesen
         - Pull Sequenz -> Nutzer interagiert mit Service Euipment, Service erfragt Authorisierung beim AAA
         - Push Sequenz -> Nutzer authentifiziert sich beim AAA und erhält Ticket/Zertifikat mit dem er auf den Service zugreifen kann
-- Sessionmanagement
+
+- **Sessionmanagement**
     - Verwendung von SessionIDs
     - gleiche SID über mehrere Server
     - Session Ende muss Service Equipment mitgeteilt werden
@@ -428,7 +430,7 @@
     - zwischen 2 Peers genau eine permanente TCP oder SCTP Verbindung
     - mehrere Sessions möglich
 
-- **Capabilities Exchange
+- **Capabilities Exchange**
     - erfolgt nach Verbindungsaufbau
     - Identitäten der anderen Peers feststellen
     - austausch der Fähigkeiten: Protokollversion, Diameter Applicationen, Sicherheitsmechanismen
