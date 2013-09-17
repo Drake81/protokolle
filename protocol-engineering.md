@@ -918,11 +918,85 @@ Die analysierten Zustände müssen bei der Erreichbarkeitsanalyse abge- speicher
         * bei sehr großen Systemen zweckmäßig, wenn keine sinnvolle Menge von Zuständen mehr abgespeichert werden kann
     * **kann nur Fehler aufdecken, nicht Abwesenheit beweisen !!**
 
-
 # Implementierung
 
+Realisierung des Protokolls in einer konkreten Ablaufumgebung entsprechend der Vorgaben der Protokollspezifikation
+
+* aufwendig, kompliziert
+* Vielzahl von Entscheidungen, die Effizienz und Korrektheit des Protokolls beeinflussen
+* starke Abhängigkeit von der Implementierungsumgebung
+* subjektiver Einfluss des Implementierers
+
+## Arten der Protokollimplementierung
+
+* Manuelle Implementierung
+    * hauptsächliche Vorgehensweise für reale Implentierungen
+
+* Automatische Implementierung
+    * FDT-basiert
+    * meistens Prototyping
+        * zum Zwecke der Validation
+    * seltener reale Implementierungen
+
+## Implementierungsentwurf
+
+* **Implementierungsentwurf**
+    * Abbildung der Vorgaben der Dienst- und der Protokollspezifikation in die gegebene Ablaufumgebung
+        * erforderlich weil
+            * logisches Modell der Protokollspezifikation nicht erhalten bleiben muss
+            * Protokollspezifikationen einige Entscheidungen der Implementierung überlassen
+
+* **Berücksichtigung der Randbedingungen**
+    * Protokollimplementierung ist immer auf ein konkretes Zielsystem ausgerichtet
+        * Betriebssystem, Implementierungssprachen, vorhandene Bibliotheken
+
+* **Lokale Implementierungsentscheidungen**
+    * Entscheidungen, die aus Gründen der Implementierungsunabhängigkeit erst beim Implementierungsentwurf getroffen werden
+    * **Können Konformität und Interoperabilität stark beeinflussen !!!**
+
+* **Wahl des Prozessmodells**
+    * wichtige Entscheidung des Implementierungsentwurfs
+    * legt fest, wie die Implementierung in die Prozess-Struktur der Ablauf- bzw. Betriebssystemumgebung abgebildet wird
+        * muss nicht zwingenderweise eine Eins-zu-Eins-Abbildung sein
+* **Arten von Prozessmodellen**
+    * Server-Modell
+        * geradlinige Umsetzung
+        * Eine Instanz
+        * langsamer
+        * einfach zu machen
+    * Activity Thread-Modell
+        * mehrere prallele Instanzen
+        * schneller
+        * schwerer umszusetzen
+
+* **Implementierungsspezifikation**
+    * dokumentiert Implementierungsentwurf
+    * Grundlage für die Kodierung des Protokolls
+        * Arbeitsdokument des Implementierers
+    * grundsätzlich auf ein bestimmtes Zielsystem ausgerichtet
+    * **häufig nicht explizit ausgeführt !!!**
+    * **explizit erforderlich für automatische Implementierung !!!**
+
+## Kodierung
+
+* **Kodierung des Protokolls**
+    * Programmkode des Protokolls lässt sich i. Allg. relativ geradlinig aus der Spezifikation ableiten
+    * weitere Funktionen erforderlich
+        * Prozessverwaltung
+        * Pufferververwaltung
+        * Zeitverwaltung
+* **Ablaufumgebung**
+    * Ablaufumgebung hat einen hohen Anteil an der Protokollausführung
+    * ca. 60 %
+    * **Ein Protokoll kann nicht unabhängig von der Ablaufumgebung implementiert werden !!!**
+* **Möglichkeiten der Einbindung eines Protokolls in die Ablaufumgebung**
+    * Integration in das Betriebssystem
+        * üblicherweise transportorientierte Instanzen
+    * Realisierung als Anwendungsprozesse
+        * anwendungsorientierte Instanzen
+    * Nutzung protokollspezifischer Ablaufumgebungen
+        * Portierbarkeit
+        * einheitliche Schnittstellen
+        * Berücksichtigung protokollspezifischer Erfordernisse
 
 # Test
-
-# Implementierung am Beispiel FSM
-
