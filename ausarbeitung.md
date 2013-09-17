@@ -137,6 +137,34 @@
 - Headernamen in lowercase
 - gzip Unterstützung ist Pflicht!
 
+## Server Push
+
+- Server kann mehrere Response auf 1 Request machen
+    - geringere Latenzzeiten
+    - ist unidireḱtionaler Stream
+    - wird mittels assoiated-stream-id-Feld mit dem Request assoziiert
+    - Parameter werden aus dem assoziierten Request genommen
+    - Abweisung mittels RST-STREAM
+
+## Compression
+
+- Komprimierung von Name/Value Headerblock zwingend
+- Verwendung des gzip aus der zlib
+- Datenbereich kann komprimiert werden (Compression Flag)
+
+# Email
+
+## Allgemein
+
+## MIME
+
+## Base64
+
+## SMTP
+
+## POP3
+
+## IMAP
 
 # DNS
 
