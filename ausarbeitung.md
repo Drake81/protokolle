@@ -1,3 +1,143 @@
+# HTTP
+
+## Grundlagen
+
+- Client Server Architektur
+- Request-Response-Schema
+- statuslos
+- zustandslos
+- TCP:80
+- textbasiert
+- Stop-n-Wait-Protokoll
+- **URI**
+    - Uniform Ressource Identifier
+    - einheitliche Ressourcenbezeichnung
+    - Schema://login:password@server.domain:portpath?parameter#fragment
+- **URL**
+    - Uniform Ressource Locator
+    - Unterart der URI
+    - Angabe von Zugriffsmechanismus und Ort
+- **URN**
+    - Uniform Ressource Name
+    - dauerhafter, Ortsunabhängiger Bezeichner für eine Ressource
+
+## Aufbau
+
+- **Message Type**
+    - Typ der Nachricht -> GET,POST,PUT,DELETE...
+    - erste Zeile der Nachricht -> GET Request-URI HTTP/1.1 CRLF
+- **Header**
+    - in HTTP/0.9 und 1.0 komplett optional
+    - in HTTP/1.1 ist Host Header pflicht!
+    - gibt spezifische Informationen an
+    - Syntax: Headername: Wert CRLF
+    - Bsp: Authorization, Refer, User-Agent, Encoding, Length, Content-Type
+- **Body**
+    - enthaelt Daten von POST/PUT Request oder GET Response
+    - optional
+    - wird durch Leerzeile von Header getrennt
+    - Ende durch Length Header markiert
+
+## Status-Line (Response)
+
+- in Response Nachricht -> HTTP/1.1 Code Text
+- **Code**
+    - 1xx Informationen -> zB Anfrage wird noch bearbeitet, weil ... 
+    - 2xx Success
+    - 3xx Redirection
+    - 4xx Client Error
+    - 5xx Server Error
+
+## Neuerungen in 1.1
+
+- Pipelining -> mehrere Anfragen ohne auf Response zu warten
+- Persistence -> bestehen bleibende Verbindung nach 1 REQU/RESP durchlauf
+    - Connection: keep-alive
+    - Keep-Alive: 115
+    - Connection: close
+    - ohne Header bleibt die Verbindung bestehen
+- Caching
+- Kompression: gzip
+
+## HTTP-Proxy
+
+- Caching
+- Zugangskontrolle
+- Anonymisierung
+- Lastverteilung
+
+## Cookies
+
+- verwendet um zustand speichern zu können
+- Server generiert Cookie und sendet es im Response an den Client
+- Client schickt bei weiteren Requests Cookie mit
+-> Server sieht, was der Client bisher gemacht hat
+-> Verbindung zu anderen Webseiten herstellen zur Personalisierung (Werbung)
+
+# SPDY
+
+## Allgemein
+
+[SPDY-Draft-3](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3 )
+
+- Verbesserung zu HTTP
+- Reduktion der Ladezeiten
+- keine Änderung an Webseite notwendig
+- Header kompression
+- unnütze Header nur 1mal übertragen
+- SSL/TLS
+- Server Push -> Server kann Daten auch ohne Request senden
+- fügt Session Layer zu HTTP hinzu
+
+## Streams
+- parallele Streams über 1 TCP Verbindung
+- Reduzierung der SYNs -> Server muss weniger Verbindungen verwalten
+- höhere Effizienz der TCP Verbindungen
+- Unabhängige, bidirektionale Sequenzen von Frames
+- Initialisierung durch Client oder Server
+- Priorisierung möglich: 0-7 (Hoch- Niedrig)
+- Anzahl begrenzt auf 31bit
+- Stream von Client -> ungerade ID
+- Stream von Server -> gerade ID
+- **Unterteilung in** 
+    - Kontrollframe
+        - C Flag gesetzt
+        - Version: 3
+        - Type: um Steuerinformationen auszutauschen
+             -> z.B. für Syn, RST
+        - Length
+        - Daten
+    - Datenframes
+        - C Flag: 0
+        - Stream ID
+        - Flags: FIN, COMPRESS…
+        - Length
+        - Daten- Frames sind binär Kodiert
+
+## Flow Control
+
+- als Kontrol Frame mit Typ "Window Update"
+- beinhaltet Stream ID und Delta Window Size
+
+## Session
+
+- beginnt mit Beendigung der TCP Initialisierung
+- asynchrone Konfiguration
+- Möglichkeit der Zertifikatsübertragung mit CREDENTIAL Control Frame
+- Konfiguration aus ID/Value Paaren
+- ID Feld aus 8bit Flags und 24bit ID
+- Berechnung der RTT mit Ping
+
+## HTTP mit SPDY
+
+- erhalt der HTTP Struktur
+- HTTP REQU/RESP in SPDY Streams
+- HTTP als Name/Value Paar im Body
+- vorangestellter Doppelpunkt vor dem Namen
+- Headernamen in lowercase
+- gzip Unterstützung ist Pflicht!
+
+
 # DNS
 
 - Domain Name System
