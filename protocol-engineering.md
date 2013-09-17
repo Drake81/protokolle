@@ -903,8 +903,24 @@ Die analysierten Zustände müssen bei der Erreichbarkeitsanalyse abge- speicher
 * Zustandsraumexplosion
     * 10^9 Zustände selbst bei kleinen Protokollen !
 
+* **Vollständige Erreichbarkeitsanalyse nur bei kleinen Protokollen möglich!!**
+
+### Bewältigung des Zustandsraumproblems
+
+* Dekomposition und Partionierung
+    * separate Analyse von Protokollphasen bzw. –teilen
+        * Abhängigkeiten können nicht immer aufgelöst werden !!!
+* Projektion
+    * Modellvereinfachung
+        * Zusammenfassung von mehreren Zuständen zu einem Zustand
+* Zufällige Suche
+    * willkürliche Auswahl des nächsten zu analysierenden Zustands
+        * bei sehr großen Systemen zweckmäßig, wenn keine sinnvolle Menge von Zuständen mehr abgespeichert werden kann
+    * **kann nur Fehler aufdecken, nicht Abwesenheit beweisen !!**
+
 
 # Implementierung
+
 
 # Test
 
