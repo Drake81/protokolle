@@ -518,9 +518,9 @@ Ziel: *Formale Beschreibung von Telekommunikationssystemen*
 * bevorzugt aber im Umfeld von *SDL* genutzt
 
 * **Anwendungen**
-* Entwurf von Kommunikationabläufen
-* Dokumentation
-* Testfallbeschreibung
+    * Entwurf von Kommunikationabläufen
+    * Dokumentation
+    * Testfallbeschreibung
 
 * **MSC unterstützt:**
     * formale Semantik (Prozessalgebren)
