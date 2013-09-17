@@ -744,18 +744,83 @@ realisiert. - Kommunikationsoftware
             * Anforderungen des Zielsystems / Ablaufumgebung
             * Auswahl von Protokolloptionen
 
-## ProtokollEntwurf
-
+# Entwurf
 * Adhoc-Protokollentwurf
     * in der Praxis vorwiegend praktiziert
         * weil kaum praktikablen systematischen Methoden
+    * Grund: Viefalt der Anforderungen
+
+* **Systematischer Protokollentwurf**
+    * theoretische Ansätze
+    * Vorteil: Absicherung von Protokolleigenschaften (z. B. Sicherheit, Lebendigkeit) durch den Entwurf
+        * keine Verifikation notwendig !!!
+
+* **Analyitsche Entwurfsmethoden**
+    * Schrittweiser Protokollentwurf ausgehend von einer formulierten Anforderungsdefinition.
+        * entspricht der traditionellen Vorgehensweise
+    * Bsp: Entwurfsregeln
+        * z. B. aus MSC
+    * Bsp: Entwurfsmuster
+        * z. B. SDL-Pattern
+
+* **Erstellung der Spezifikation**
+    * Aufwendig und anspruchsvoll
+    * Problem: Erstspezifikationen sind in der Regel informal
+        * formale Spezifikationen entstehen häufig erst wesentlich später
+        * häufig zu spät
+    * Problem: Subjektiver Einfluss des Spezifizierers
+        * Grund: Komplexität
+        * kaum autorisierte formale Spezifikationen !!!
+    * Üblicherweise mit Prototyping - von abstrakt zu konkret
+
+# Verfikation oder Validation
+
+Die Protokollverifikation hat die Aufgabe, die logische Korrektheit und die richtige Funktionsweise des dokumentierten Protokollentwurfs zu prüfen.
+
+## Begriffsbestimmung
+
+**Der Begriff der Verifikation wird in der Literatur unterschiedlich verwendet !!!**
+alternative Verwendung Verifikation - Validation
+
+* Protokollvalidation
+    * Prozess der Bewertung der funktionalen und nichtfunktionalen Eigenschaften des Protokollentwurfs und seiner Implementierung bezüglich der Nutzeranforderungen
+        * *Entwickeln wir das richtige System ?*
+
+* Protokollverifikation
+    * Formaler Nachweis der Korrektheit, Vollständigkeit und Konsistenz des Protokollentwurfs, repräsentiert durch die Spezifikation
+        * *Entwickeln wir das System richtig ?*
+
+## Prüft auf und mit
+
+* **Formaler Nachweis**
+    * der spezifizierte Dienst wird erbracht
+    * die Spezifikation korrekt, vollständig und konsistent
+
+**Voraussetzung für mehrfache Implementierungen des Protokolls !!!**
+
+* **Korrektheit**
+    * Funktionelle Korrektheit des Entwurfs und der Erbringung des spezifizierten Dienstes innerhalb einer endlichen Zeit
+
+* **Vollständigkeit**
+    * Berücksichtigung aller möglichen Ereignisse und Optionen
+
+* **Konsistenz**
+    * innere Widerspruchsfreiheit des Entwurfs
+        * z. B. Deadlock-Freiheit, Livelock-Freiheit
+
+## Prototyping
+
+Unter Prototyping versteht das Ausführbarmachen der Spezifikation zu Validationszwecken.
+
+* FDT-Compiler unterstützen Prototyping-Implementierungen
+    * Abbildung z.B. in C++ und Verbinden mit Laufzeitsystem, das im Kern die FDT- Semantik umsetzt
+* Prototype muss nicht notwendigerweise vollständig sein !!!
+* Prototyping ist wiederholbar
+    * entsprechend der Iterationsstufe der Spezifikationsentwicklung
+
+**Prototyping ist die am meisten genutzte Validationsmethode in der praktischen Protokollentwicklung !!!**
 
 
-# Entwurf
-
-# Validation
-
-# Verfikation
 
 # Implementierung
 
