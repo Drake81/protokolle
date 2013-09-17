@@ -1000,3 +1000,49 @@ Realisierung des Protokolls in einer konkreten Ablaufumgebung entsprechend der V
         * Berücksichtigung protokollspezifischer Erfordernisse
 
 # Test
+
+Ein Test ist ein Experiment, in dem untersucht wird, ob ein Objekt bestimmte, erwartete Anforderungen erfüllt !
+
+Der Protokolltest hat die Aufgabe zu prüfen, ob das implementierte Protokoll die Vorgaben der Spezifikation umsetzt.
+
+* komplementär zur Protokollverifikation
+    * bezieht sich dabei nur auf eine vorliegende Implementierung
+* Es gelten grundsätzlich ähnliche Aussagen wie beim Softwaretest:
+    * Ziel des Testens ist es, Fehler in der Implementierung aufzudecken !!!
+    * Ein Test kann nur das Vorhandensein von Fehlern nicht aber ihre Abwesenheit nachweisen !!!
+* **Wichtigste praktische Validationsmethode für Protokolle !!!**
+
+## Arten des Protokolltests
+
+* Entwicklungsbegleitende Tests
+    * Debugging
+* Konformitätstest
+    * Übereinstimmung mit Spezifikation
+* Interoperabilitätstest
+    * Zusammenarbeitsfähigkeit von Implementierungen
+* Leistungstest
+    * Leistungsverhalten der Implementierung
+* Robustheitstest
+    * Verhalten der Implementierungen bei falschen Eingaben
+
+### Konformitätstest
+Ziel des Konformitätstests ist es, zu überprüfen, ob eine gegebene Implementierung eines Protokolls der zugrundeliegenden Spezifikation des Protokolls entspricht.
+**In der Praxis vor allem ein Test auf Einhaltung von Protokoll-Standards**
+
+###  Interoperabilitätstests
+Der Konformitätstest allein kann die Zusammenarbeitsfähigkeit verschiedener Protokollimplementierungen, ihre Interoperabilität, nicht gewähr- leisten.
+* **Gründe**
+    * Umfassende Konformitätstests sind in der Praxis aus Kostengründen kaum möglich !!!
+    * lokale Implementierungsentscheidungen
+    * Wahl unterschiedlicher Protokolloptionen
+
+## Testarten
+
+* White Box (oder Glass Box Test)
+    * Der Quellkode ist dem Testingenieur zugänglich
+* Black Box Test
+    * Der Quellkode ist dem Testingenieur nicht zugänglich
+        * nur Test bzgl. des nach außen sichtbaren/beobachtbaren Verhaltens !!!
+* Grey Box Test
+    * Dem Testingenieur sind beschränkt Informationen über den Quellkode zugänglich
+        *z. B. Strukturinformationen
