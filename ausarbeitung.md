@@ -141,7 +141,7 @@
 
 - Server kann mehrere Response auf 1 Request machen
     - geringere Latenzzeiten
-    - ist unidireḱtionaler Stream
+    - ist unidirektionaler Stream
     - wird mittels assoiated-stream-id-Feld mit dem Request assoziiert
     - Parameter werden aus dem assoziierten Request genommen
     - Abweisung mittels RST-STREAM
@@ -182,7 +182,7 @@
         - Comments
         - Keywords
         - Received
-        - Return_Path
+        - Return-Path
         - MessageID
         - InReplyTo
         - X-..... -> eigener Header
@@ -220,7 +220,7 @@
 - kommandoorientiert
 - TCP:25 und Bytestrom
 - Layer 5
-- Architektur: Client_Server
+- Architektur: Client-Server
 - Verfahrensweise: REQU/RESP
 - Erweiterung mit ESMTP
     - Zugangskontrolle per Login/Passwort
@@ -897,21 +897,21 @@
 - **socket erzeugen**
     - int socket(int family, int type, int protocol)
     - family: Protokollfamilie Layer 4 (IP, IPv6, IPX, RAW Socket…)
-    - type: Socketart -> SOCK_STREAM oder SOCK_DGRAM
-    - protocol: welches Transportprotokol -> IPPROTO_TCP, IPPROTO_UDP…
+    - type: Socketart -> `SOCK_STREAM oder SOCK_DGRAM`
+    - protocol: welches Transportprotokol -> `IPPROTO_TCP, IPPROTO_UDP…`
 - **connect() für StreamSockets** 
-    - int connect(int sockfd, struct sockaddr* serv_addr, int addrlen)
+    - `int connect(int sockfd, struct sockaddr* serv_addr, int addrlen)`
     - sockfd: Deskriptor aus socket()
     - servaddr: Adresse mit der sich verbunden wird
     - addrlen: länge des struct sockaddr
 - **bind() des Servers**
-    - int bind(int sockfd, struct sockaddre *myaddr, int addrlen)
+    - `int bind(int sockfd, struct sockaddre *myaddr, int addrlen)`
 - **listen()**
     - warteschlange für die eingehenden Verbindungen
     - int listen(int sockfd, int backlog);
     - backlog: länge der wateschlange
 - **accept()**
-    - int accept(int sockfd, struct sockaddr *addr, int addrlen)
+    - `int accept(int sockfd, struct sockaddr *addr, int addrlen)`
     - addr: addresse des clients
     - wenn liste leer, dann blockiert accept()
 - **write() send()**
@@ -926,16 +926,16 @@
 
 ## Optionen
 
-- int setsockop(int sockfd, int level, int optname, const void *optval, socklen optlen)
-- level: Schicht -> IPPROTO, IPPROTOV6
+- `int setsockop(int sockfd, int level, int optname, const void *optval, socklen optlen)`
+- level: Schicht -> `IPPROTO, IPPROTOV6`
 - optname: Option die gesetzt wird
 - optval: Wert der Option
 - optlen: länge des Wertes
 - Optionen:
-    - SO_REUSEADDR -> wiederverwenden einer aktuellen Adresse
-    - SO_BROADCAST -> Datagram an Broadcast senden
-    - SO_RCVBUF -> Empfangsbuffergröße
-    - SO_SNDBUF -> Sendebuffergröße
+    - `SO_REUSEADDR` -> wiederverwenden einer aktuellen Adresse
+    - `SO_BROADCAST` -> Datagram an Broadcast senden
+    - `SO_RCVBUF` -> Empfangsbuffergröße
+    - `SO_SNDBUF` -> Sendebuffergröße
 
 ## Blocking / Non-Blocking
 
