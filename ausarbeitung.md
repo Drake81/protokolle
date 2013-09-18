@@ -165,7 +165,7 @@
     - MUA - Mail User Agent -> Darstellung der Mail, nutzt MTA zum versenden/empfangen (Mutt, Outlook)
     - MTA - Mail Transfer Agent -> Zwischenspeichern und weiterleiten an andere MTA's (fetchmail)
 - **Protokolle**
-    - SMTP -> versenden vom Client zum Server
+    - SMTP -> versenden vom Client zum Server und Server zu Server
     - IMAP, POP3 -> abholen vom Server zum MUA
 - 7 Bit ASCII Format
 - Zeilenbasiert (CRLF am Ende jeder Zeiler)
@@ -215,11 +215,124 @@
 
 ## SMTP
 
-
+- Protokoll der MTA
+- 7bit ASCII
+- kommandoorientiert
+- TCP:25 und Bytestrom
+- Layer 5
+- Architektur: Client_Server
+- Verfahrensweise: REQU/RESP
+- Erweiterung mit ESMTP
+    - Zugangskontrolle per Login/Passwort
+    - SSL/TLS
+    - 8bit MIME
+    - abwärtskompatible
+- **Befehle**
+    - HELO -> Anmelden des Clients auf Server
+    - EHLO -> ESMTP Variante des HELO
+    - MAIL -> Beginn einer Transaktion, Absenderangabe
+    - RCPT -> Empfängeradresse
+    - DATA -> Eigentliche Email mit Header, Body und abschließen CRLF . CRLF
+    - RSET -> Abbruch der Transaktion
+    - VRFY -> Benutzername und Mailboxadresse verifizieren
+    - QUIT -> SMTP Beenden
+    - SAML -> Send and Mail -> an Adresse und Terminal senden
 
 ## POP3
 
+- Post Office Protocol
+- abrufen der Mails 
+- Transfer zum MUA
+- löschen auf dem Server
+- Authentisierung per Login/Passwort
+- TCP:110/995(SSL)
+- Layer 5
+- Client-Server
+- REQU/RESP
+- **Session**
+    - Authentifizierung -> USER/PASS -> unverschlüsselt
+    - Transaction state -> Zugriff auf Mailbox und abfragen/löschen der Nachrichten; mit RSET zurücksetzen der Session
+    - Update state -> initiiert durch QUIT
+        - erst hier erfolgt die Löschung der Nachrichten auf dem Server
+        - bei Abbruch der TCP Session erfolgt kein QUIT und damit keine Löschung
+- **Befehle**
+    - Verbindungsaufbau zum server zB über telnet <Server> PortNr
+    - USER -> Usernamen oder Benutzerkonto auf dem Server
+    - PASS -> Passwort in Klartext
+    - STAT -> Status und Anzahl der neuen Emails
+    - LIST -> Auflistung der Nummer und Größe jeder Mail
+    - RETR -> holt die Mail Nr ... vom Server -> RETR 1
+    - DELE -> löscht die Mail Nr ... vom Server -> DELE 1
+    - NOOP -> keine Funktion, nur Antworttest, Zeitüberbrückung
+    - QUIT -> beendet Sitzung 
+    - RSET -> Reset, Löschungen werden rückgängig gemacht
+    - APOP -> Authentifizierung via Challenge
+    - TOP -> Header und x Zeilen der Mail Nr....
+- **APOP**
+    - kein Verbindungsaufbau sendet der Server einen TimeStamp mit
+    - MD5(ServerTimeStamp + Passwort)
+    - Client: APOP Username Digest zur Authentifizierung
+
 ## IMAP
+
+- Internet Message Access Protocol / Interactive Mail Access Protocol (alte Bezeichnung bis Draft3)
+- Manipulation auf Mailbox im Server -> kein lokales Speichern
+- Authentisierung per Login/Password
+- TCP:143/993
+- Layer 5
+- Client-Server
+- REQU/RESP und REQU/Muliple-RESP
+
+## Vergleich POP vs IMAP
+
+- **Gemeinsamkeiten**
+    - Server läuft ständig
+    - Zugriff via Internet
+- **Vorteil POP3**
+    - einfach Implementierung
+    - geringe Anforderung an Server
+- **Vorteil IMAP**
+    - Speicherung/Archivierung auf Server
+    - Offline-Verfügbarkeit durch Kopie vom Server
+    - Server speichert Zustand der Nachricht
+    - Auswahl der Teile, die herunter geladen werden sollen (nur Header)
+
+## Sicherheit
+
+- Transportsicherheit -> TLS/SSL für MTA und MUA
+- SPAM-Schutz -> sinvoll schwere Adresse, fehlerfreie Software, Adresse sinnvoll weitergeben
+- Empfängerschutz -> BCC nutzen
+- Integrität und Authentizität via Signatur mit Private Key
+- Vertraulichkeit -> Verschlüsselung, zB PGP
+- **PGP**
+    - Pretty Good Privacy -> Dezentrales Verfahren mit "Web of Trust"
+- **X.509c**
+    - zentraler Ansatz mit Public Key Infrastruktur
+- Listing in verschiedene Gruppen:
+    - Blacklist: immer ablehnen
+    - Whitelist: immer annehmen
+    - Graylist: unsichere Herkunft
+- Routing innerhalb der Unternehmensserver
+- Überprüfung auf Server ob User existiert und ggf löschen
+- Lastverteilung und Ausfallsicherheit mit mehreren Servern und DNS Prio
+
+## Base16
+
+- aus 1 Byte werden 2 Byte
+- Zeichenvorrat von 16 (0-9,A-F)
+- Verdopplung des Speicherbedarfs
+- ergänzen mit 4 führenden Nullen
+
+## Base64
+
+- aus 3 Byte werden 4 Byte
+- es müssen immer 3 Byte kodiert werden und 4 Byte entstehen (wenn nötig mit Paddern auffüllen)
+- 8Bit block nehmen
+- zwei führende Nullen, dann die 6 höchsten Bits ergeben neuen Wert
+- wieder 2 führende Nullen + Rest des vorhergehenden Bytestrom + Folgebytestrom  = 8 Bit
+- usw bis alles kodiert
+- am Ende mit Nullen auffüllen bei nicht vollen Bitfolgen
+- leere 8Bit Blöcke werden durch = dargestellt
 
 # DNS
 
@@ -748,18 +861,83 @@
         - Stati -> authorized(802.1X deaktiviert), unauthorized(Port deaktiviert), auto(PAE)
 
 
+# Sockets
 
+- standardisierte Schnittstelle zwischen Anwendung und Transportschicht
+- aus BSD
+- Kommunikation immer mit Socket Paar (jede Anwendung hat eigenen Socket)
 
+## Arten
 
+- **Datagram Socket**
+    - verbindungslos, Paketorientiert
+    - keine Verbindungsaufbau/abbau
+    - UDP, DCCP, ICMP
+    - Reihenfolge und Fehlerkorrektur durch Anwendung
+    - **Ablauf Server**
+        - socket
+        - bind
+        - recvfrom
+        - sendto
+        - close
+    - **Ablauf Client**
+        - socket()
+        - sendto
+        - recvfrom
+        - close
+- **streaming Socket** 
+    - verbindungsorientiert, Bytestrom
+    - Auf-/Abbau der Verbindung
+    - Daten nach Verbindungsaufbau
+    - Fehlerbehandlung, Reihenfolge in Tansportschicht
+    - TCP, SCTP
 
+## Funktionen für Ablauf
 
+- **socket erzeugen**
+    - int socket(int family, int type, int protocol)
+    - family: Protokollfamilie Layer 4 (IP, IPv6, IPX, RAW Socket…)
+    - type: Socketart -> SOCK_STREAM oder SOCK_DGRAM
+    - protocol: welches Transportprotokol -> IPPROTO_TCP, IPPROTO_UDP…
+- **connect() für StreamSockets** 
+    - int connect(int sockfd, struct sockaddr* serv_addr, int addrlen)
+    - sockfd: Deskriptor aus socket()
+    - servaddr: Adresse mit der sich verbunden wird
+    - addrlen: länge des struct sockaddr
+- **bind() des Servers**
+    - int bind(int sockfd, struct sockaddre *myaddr, int addrlen)
+- **listen()**
+    - warteschlange für die eingehenden Verbindungen
+    - int listen(int sockfd, int backlog);
+    - backlog: länge der wateschlange
+- **accept()**
+    - int accept(int sockfd, struct sockaddr *addr, int addrlen)
+    - addr: addresse des clients
+    - wenn liste leer, dann blockiert accept()
+- **write() send()**
+    - benötigen connect
+    - senden kann blockieren
+- **sendto()**
+    - sendet an adresse
+    - für Datagram
+    - blockierend
+- **read(), recv()**
+    - benötigt vorhergehende Bindung an Adresse
 
+## Optionen
 
+- int setsockop(int sockfd, int level, int optname, const void *optval, socklen optlen)
+- level: Schicht -> IPPROTO, IPPROTOV6
+- optname: Option die gesetzt wird
+- optval: Wert der Option
+- optlen: länge des Wertes
+- Optionen:
+    - SO_REUSEADDR -> wiederverwenden einer aktuellen Adresse
+    - SO_BROADCAST -> Datagram an Broadcast senden
+    - SO_RCVBUF -> Empfangsbuffergröße
+    - SO_SNDBUF -> Sendebuffergröße
 
+## Blocking / Non-Blocking
 
-
-
-
-
-
+Also darüber kannst du mal schön selbst nachdenken :p
 
