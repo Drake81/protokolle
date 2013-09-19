@@ -6,12 +6,28 @@
 
 ## Antwort
 
+* Definiert Sendefenster mit Anzahl der Pakete
+    * Pakete werde ohne vorheriges ACK gesendet
+* Vorteile:
+    * Schnellers senden gegenüber normalem Verfahren
+
+* Duplicate ACK weißt auf Fehler hin
+    * Letzes richtig empfangenes Paket wird mehrfach geACKt ^^
+* Selective ACK
+    * Gruppierung von mehreren ACK in einem ACK-Paket
+    * Übertragung der erfolgreichen Pakete
+
 # Aufgabe 2
 
 * Erläutern Sie die Begriffe: Scope (DHCP), Realm, Policy, Supplicant und ASN.1!
 
 ## Antwort
 
+* Scope - Adressbereich der vom DHCP-Server vergeben wird
+* Realm - Arbeitsbereich/Domäne
+* Policy - Einträge in einer Datenbank zur Rechteverwaltung
+* Supplicant - Rechner der sich authentifzieren soll/will
+* ASN.1 - Beschreibungs Sprache für Protokollspezifikation
 
 # Aufgabe 3
 
@@ -19,6 +35,14 @@
 * Nennen und beschreiben Sie Methoden, um das Problem der Zustandsraumexplosion zu lösen oder zu umgehen!
 
 ## Antwort
+
+* Bei großen Zustandsautomaten entstehen sehr viele mögliche Zustände die unterschiedlich aufgerufen werden können.
+* Ab `10^9` zu viele Zustände, um alle Zustände in realistischer Zeit auf Konformität prüfen zu können.
+* Nur bis `10^7`(kleine Protokolle) realistische vollständige Prüfung möglich
+
+* Teilweises Testen
+* Testen auf definierte Zustände - Partitionierung
+* zufälliges Testen von Zuständen und Transitionen
 
 # Aufgabe 4
 
@@ -31,6 +55,10 @@ Beim Speichern wird Ihnen ein Fehler signalisiert der besagt, dass nicht genug S
 
 ## Antwort
 
+* Durch MIME!
+    * Erzeugt Overhead durch Kovertierung
+* ca. 1/3 mehr als ohne MIME mit base64
+
 # Aufgabe 5
 
 Wieso kann durch einen TCP SYN-Flooding Angriff ein Server lahm gelegt werden? 
@@ -39,6 +67,24 @@ Wieso kann durch einen TCP SYN-Flooding Angriff ein Server lahm gelegt werden?
 * Welche Informationen werden dazu im Cookie gespeichert?
 
 ## Antwort
+
+* Zu viel Speicher wird allokiert...
+    * Ressourcenknappheit
+    * Keine Anfragen können mehr angenommen werden
+
+* Funktion:
+    * SYN
+    * SYN,ACK,COOKIE
+    * ACK, COOKIE
+
+* Erst nach Empfang des SYN-Cookies vom Client wird speicher allokiert
+
+* Cookie behinhaltet
+    * Session-ID
+    * Max-Segmentsize
+    * Zeitstempel
+    * Ports
+    * Geheimer Wert vom Server
 
 # Aufgabe 6
 
@@ -49,6 +95,30 @@ Wieso kann durch einen TCP SYN-Flooding Angriff ein Server lahm gelegt werden?
     * Begründen Sie Ihre Aussage!
 
 ## Antwort
+
+* Arten:
+    * Site-to-Site
+        * Netze über Router verbinden
+    * Site-to-End
+        * Netz mit Clientrechner
+    * End-to-End
+        * Zwei Clientrechner
+        * Remote-Service
+
+
+* Modi:
+    * Transportmode:
+        * End-to-End Schutz
+        * Direkt Verbindungen von Rechnern
+    * Tunnelmode:
+        * Geschützt durch ein drittes Netz routen
+
+* Zusatzinfo...
+    * AH - Authentifizierung
+        * Sicherstellen das richtiger Kommunktionspartner
+        * Inhalt unverfäscht
+    * AH/ESP - Verschlüsselung
+        * Inhalt vor Zugriff durch unberechtigte geschützt
 
 # Aufgabe 7
 Skizzieren Sie einem Message Sequence Chart (MSC) zu Aufgabe 1 in dem 5 TCP-Segmente gesendet werden.
@@ -62,3 +132,4 @@ In dem MSC sind vier Alternativen zu unterscheiden:
 Hinweis: Verwenden Sie keine vereinfachte Form des MSC, sondern die vollständige Form wie in ITU-T Z.120 beschrieben.
 
 ## Antwort
+
