@@ -336,8 +336,68 @@
 
 # DNS
 
+## Allgemein
+
 - Domain Name System
-- auflösen von IP zu Host und umgekehrt
+- auflösen von IP zu Hostnamen und umgekehrt
+- hierarchischer Aufbau mit Teile und Herrsche Prinzip
+    - Aufteilung in kleiner werden Zonen -> Lastverteilung
+- Grund für Hostnamen: leichter zu merken; Namensraum um Zonen zu bilden -> everdown.de
+- früher nur: /etc/hosts
+    - per Hand jede IP eintragen, auf jeden Rechner
+    - austausch der Host-Dateien
+    - sehr aufwendig bei akuteller Internetgröße :)
+- **Komponenten**
+    - Nameserver -> Rechner mit Namensdatenbank
+    - Resolver -> anfragende Software eines Rechners
+- **Hierarchie**
+    - Root (Darstellung als .): zentral verwaltete globale Server
+    - TLD (de, uk, arpa, mil, xxx) -> Unterteilung in Länder, Organisationen und andere Gruppierungen
+
+## Auflösungsverfahren
+
+- **Iterativ**
+    - anfrage an Nameserver
+    - dieser liefert die Adresse des Hosts oder des nächst besseren Nameservers
+    - danach muss Client den nächsten Server anfragen
+    - Vorteil: weniger Last für Server
+    - Nachteil: mehr Last für Client
+
+- **Rekursiv**
+    - anfrage an den Nameserver durch client
+    - hat der Nameserver keinen Eintrag fragt er selbst beim nächst höheren Nameserver nach
+    - Req/Resp laufen den Strang rekursiv ab (Antwort geht auch über jeden Nameserver)
+
+## FQDN
+
+- Fully Qualified Domain Name
+- komplette Darstellung der Ressourcen in hierarchischer Reihenfolge endent mit .
+- wird von rechts nach links gelesen -> Root.TLD.SD.Zone.Dienst
+- maximal 255 Zeichen ('A-Z', 'a-z'. '0-9', Minus, Unterstrich)
+- einzelner Abschnitt = Label
+    - 1-63 Zeichen lang
+    - beginnt mit Buchstaben
+    - endet nie mit - oder _
+
+## Zonendatei und RR
+
+- Zonendatei beinhaltet Hosts und Nameserver für die Zone
+- beginn mit Globaler Konfiguration
+    - globale TTL ->  $TTL 300
+    - '@ IN SOA ns1.bsp.de. admin.bsp.de.(globale config)
+        - @ für den Ursprung also bsp.de
+        - SOA -> Start of Authority
+        - ns1… -> Master NS der Zone
+        - admi… Email ohne @
+- RR -> Resource Record -> Eintrag in der Datei
+- Aufbau: '<Name> <TTL> <Class> <Type> <RDATA>'
+    - Name: Ressource die angesprochen werden soll
+    - TTL: optionales Time To Live in sec
+    - Class: meist IN für Internet?
+    - Type: Art des Eintrages -> NS, MX, A, AAAA, CNAME, PTR
+    - RDATA: Adresse auf die verwiesen wird (IP, FQDN's)
+
+
 
 # autoconfig
 
