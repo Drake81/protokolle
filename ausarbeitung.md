@@ -339,6 +339,11 @@
 ## Allgemein
 
 - Domain Name System
+- TCP/UDP :53
+- UDP bei Query <512kB
+- sollte die länge Überschritten werden, dann wird TC Flag gesetzt und alle weiteren Nachrichten via TCP gesendet
+- TCP Nachrichten enthalten 2 Byte Feld zu beginn mit Länge der gesamten Nachricht enthält
+- unverschlüsselte Übertragung
 - auflösen von IP zu Hostnamen und umgekehrt
 - hierarchischer Aufbau mit Teile und Herrsche Prinzip
     - Aufteilung in kleiner werden Zonen -> Lastverteilung
@@ -397,7 +402,43 @@
     - Type: Art des Eintrages -> NS, MX, A, AAAA, CNAME, PTR
     - RDATA: Adresse auf die verwiesen wird (IP, FQDN's)
 
+## Servertypen
 
+- **Primary Server**
+    - beinhaltet die Zonendatei, die alle Server verwenden
+    - manuelle Pflege der Zonendatei
+    - beantwortung von DNS Anfragen
+- **Secondary Server**
+    - Zonedatei wird über Sync vom Primary bezogen
+    - regelmäßiger automatischer Sync anhand der Timer der SOA
+    - beantworten von DNS Anfragen
+- **Caching Server**
+    - zwischenspeichern bereits getätigter Responses
+    -> Entlastung anderer Server und schnellere Bearbeitung von Anfragen
+    - positive sowie negative Responses werden gespeichert
+    - Speicherdauer begrenzt auf TTL in sec
+- **Forwarder/Client Server**
+    - agieren nie mit Root Server
+ 
+## Aufbau DNS Nachricht
+
+- Header
+    - ID
+    - QR Flag (Query/Request)
+    - TC Flag (TrunCation lange Nachricht)
+    - Anzahl der Questions, Antwort RR, Authority RR, Additional RR
+- Question
+- Answer
+- Authority
+- Additional
+
+## Sicherheit
+
+- Spoofing -> Umleitung auf andere Adressen
+- Host Datei manipulieren
+- DDOS auf DNS
+- Cache Poisoning -> falsche Daten in Cache einbringen (Resp mit falschen Daten ins Netzwerk bringen)
+- einbringen von Sicherheit mittels asymmetrischer Verschlüsselung (public key wird mitgeschickt, private key zur Signierung)
 
 # autoconfig
 
