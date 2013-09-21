@@ -1119,3 +1119,68 @@ Also darüber kannst du mal schön selbst nachdenken :p
     - SessionID
     - Length -> Payload ohne Header
     - Data -> PPP Frame
+
+## GRE
+
+- Generic Routing Encapsulation
+- statuslos
+- nutzt IP
+- überträgt Layer3
+- keine Authentifizierung/Verschlüsselung
+- **Encapsulation**
+    - Delivery Header -> meist IP Frame
+    - GRE Header -> im Datafield des IP Frames
+    - Payload -> Layer 3 Frames oder weitere GRE Frames
+
+## PPTP
+
+- Point to Point Tunneling Protocol
+- nutzt separate Verbindung (Control Connection) für Management
+- Control Connection über TCP:1723
+- tunnelt nur PPP
+- nutzt modifziertes GRE für Tunnel (ACK-Nr für Flow Control)
+- für Zugang aus ISDN/PSTN
+- Access Concentrator -> Gerät das Zugang haben will
+- Network Server -> Gerät das Zugang verwaltet
+
+
+## L2TP
+
+- Layer 2 Tunneling Protocol
+- tunnelt PPP
+- über paketorientierte Netze (UDP, ATM)
+- mehrere PPP Sessions über L2TP
+- definiert Header für Control und Datentunnelnachrichten
+- Sicherheit mittels PAP, CHAP
+
+## EtherIP
+
+- Übertragung von Ethernet Paketen in IP Frames
+- IP, EtherIP, EthernetFrame
+- **EtherIP Header**
+    - Version: 4bit (aktuell 3)
+    - Reserved: 12bit
+- Sicherheit: keine
+- Übertragungsfehler: müssen andere merken
+- Vorteil:
+    - geringer Overhead
+    - leicht zu Implementieren
+    - geringer Encapsulation Aufwand
+
+## IP in IP
+
+- Verschachtelung von IP in IP
+- notwendig für MobileIP
+- **Encapsulation**
+    - outer IP
+        - Quell und Zieladresse der Tunnelendpunkte
+        - Änderung eines Tunnelendpunktes im Betrieb möglich
+    - inner IP
+        - bleibt erhalten
+        - TTL wird am Tunnelende dekrementiert
+    - Payload
+- **Tunnel Management**
+    - Tunnel MTU -> via ICMP Reports
+    - Congestion -> Source Quench Nachricht, wenn Datagram verworfen wird
+
+## IPSec
