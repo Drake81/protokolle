@@ -1042,3 +1042,80 @@
 
 Also darüber kannst du mal schön selbst nachdenken :p
 
+# Tunnelprotokolle
+
+## VPN
+
+- Virtual Private Network
+- Übertragung von Layer 2 - 4 Protokollen
+- Nutzung von Diensten in geografisch getrennten Netzen (Erstellung eines logischen/virtuellen LANs))
+- **Arten**
+    - Site to Site -> Verbindung von Netzen
+    - Site to End -> Host mit Netz (Heimarbeitsplatz)
+    - End to End -> Verbindung zweiter Hosts (Remote Access)
+- **Vorteile**
+    - Verbindung physisch getrennter Netze
+    - sensible Daten über unsichere Netze (falls Verschlüsselung vorhanden)
+    - leicht erweiterbar
+- **Nachteile**
+    - zusätzlicher Overhead
+    - langsamer durch Enkapselung und Verschlüsselung
+
+## PPP
+
+- Point to Point Protocol
+- Tunnelprotokoll für den Netzzugangsbereich (Access) -> DSL,GPRS, UMTS
+- Verbindungsorientiert -> Aufbau, Konfig, Überwachung der Verbindung
+- tunnelt Layer 3 -> IP,IPx, etc
+- Multiplexing der Layer 3 Protokolle über eine PPP Verbindung möglich
+- **Ablauf**
+    - Konfigurieren und Testen des Links mit LCP (Link Control Protocol)
+        - aushandeln von MRU (Maximum-Receive-Unit)
+        - Indentifizierung
+        - Loop-back Links ausfindig machen
+    - optionale Authentifizierung
+    - Konfiguration des Network Layer Protocols via NCP (Network Configuration Protocol)
+        - NCP als Oberbegriff für die einzelnen Layer3 Konfigurationsprotokolle -> z.B. InternetProtocol Configuration Protocol
+    - versenden von Datagrammen
+    - weitere Konfiguration mit LCP und NCP möglich
+- **Aufbau des Frames**
+    - Protocol Informationen 2 Byte -> welches Layer 3 Proto usw
+    - Informationen -> maximal 1 IP Packet pro PPP Datagramm, maximal 1500 Byte groß
+    - Padding -> zum auffüllen auf MRU Größe
+- **Authentifizierung**
+    - PAP -> 2 Wege Handshake, ID/Passwort als Klartext
+    - CHAP -> Challenge und MD5(Challenge, ID, Passwort)
+    - MSCHAP
+    - EAP
+
+## PPPoE
+
+- nutzen des PPP in Ethernet
+- PPPoE Daten werden im Datenfeld des Etherframe übertragen
+- **Phasen**
+    - Discovery Stage
+        - statuslos
+        - MAC Adressen ermitteln
+        - SessionID festlegen
+        - Ablauf:
+            - Host sendet PADI (PPPoE Active Discovery Initiation) -> Broadcastmessage mit SessionID=0, ServiceName etc
+            - Server senden PADO (PAD Offer) -> Unicast mit SessionID=0, Access ConcentratorName etc
+            - Host wählt Server aus und sendet PADR (PAD Request) -> Unicast an Server mit SID=0 etc
+            - PADS (PAD Session-confirmed) -> Server generiert SID und sendet PADO mit SID per unicast
+    - Session Stage
+        - PPP Session, wie in PPP üblich (s.o.)
+        - PPPoE Payload enthält PPP Frame
+        - MAC Adressen und SessionID identifizieren die Session eindeutig
+- **Frameaufbau Ethernet**
+    - Destination Address
+    - Source Address
+    - Type -> Identifizierung der PPPoE Phase
+    - Data mit PPPoE Frame
+    - CRC
+- **PPPoE Frame**
+    - Version
+    - Type
+    - Code
+    - SessionID
+    - Length -> Payload ohne Header
+    - Data -> PPP Frame
