@@ -1184,3 +1184,51 @@ Also darüber kannst du mal schön selbst nachdenken :p
     - Congestion -> Source Quench Nachricht, wenn Datagram verworfen wird
 
 ## IPSec
+
+- IP Security
+- bestehend aus: 
+    - Authentication Header
+    - Encapsulation Security Payload
+    - Security Associations
+    - Key Management mit IKE
+- **Modi**
+    - Transport Modus -> Schutz des Payloads mit AH oder ESP
+    - Tunnel Modus -> Schutz des gesamten IP Datagramms mit AH/ESP und zusätzlicher äußerer IP Adresse
+- **IKEv2**
+    - ermöglicht gegenseitige Authentifizierung
+        - aufbau einer Security Association
+        - austausch es Shared Secret für AH/ESP
+    - Requ/Resp Verfahren
+    - UDP:500/4500
+    - Ablauf:
+        - IKE SA INIT -> krypto Algo Aushandlung, Diffie Hellman Algo <- erwieder mit Response
+        - IKE AUTH -> Authentifizierung der vorhergehenden Nachricht, Zertifikatsaustausch und Etablierung der Child SA
+- **Diffie Hellman**
+    - Verfahren:
+        - A denkt sich Primzahl p, Zahl g und a (1<=a<p) aus
+        - A berechnet ka = g^a mod p
+        - A sendet B: p, g, ka
+        - B denkt sich b aus und berechnet kb = g^b mod p
+        - B sendet A: kb
+        - A berechnet Schlüssel K = kb^a mod p
+        - B berechnet Schlüssel K = ka^b mod p
+     - Allg.
+        - asymmetrisches Verfahren
+        - K kann von beiden berechnet werden und dient als Symmetrischer Schlüssel
+- **SPD**
+    - Security Police Database
+    - Konfiguration vor SA Aufbau
+    - IP-Adressen/Adressbereiche der Tunnelendpunkte
+    - Verwendung von AH/ESP
+    - verwendete Kryptoalgorithmen
+- **SAD**
+    - Security Association Database
+    - verwalten der aktiven SAs
+    - dynamische Erstellung und Verwaltung
+    - enthält Schlüssel der SAs
+    - überwacht den Status der SAs (statusbehaftet)
+- **AH**
+    - Authentication Header
+    - wird IP Header und Payload vorangestellt
+    - Verwendung verschiedener HASH Funktionen mögl -> MD5, SHA-1, SHA-256
+    - im Header ist Integrity Check Value -> 
