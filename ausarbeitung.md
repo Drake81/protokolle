@@ -1231,4 +1231,61 @@ Also darüber kannst du mal schön selbst nachdenken :p
     - Authentication Header
     - wird IP Header und Payload vorangestellt
     - Verwendung verschiedener HASH Funktionen mögl -> MD5, SHA-1, SHA-256
-    - im Header ist Integrity Check Value -> 
+    - im Header ist Integrity Check Value -> Hash vom Daten, IPHeader und Key zur Integritätssicherung
+    - verhindert nur, dass die Daten verändert werden
+    - zusätzlich wird ein Index (SPI Security Parameter Index) mitgeschickt, wo die Sicherheitsinformationen in der SPD des Zielrechners liegen
+- **ESP**
+    - Encapsulating Security Payload
+    - sicherstellen der Vertraulichkeit einer Übertragung
+    - Verschlüsselung des IP Datagramms mit DES, 3DES oder IDEA (International Data Encryption Alorithm
+
+## TLS
+
+- Transport Layer Security
+- **Ablauf**
+    - *ClientHello* mit CipherSuite Felder für Vorschlag der Sicherheitsverfahren
+    - *ServerHello* mit ausgewählter CipherSuite
+    - Server sendet *Zertifikat* mit public Key
+    - Server sendet *ServerKeyExchange* mit Schlüsselinformationen
+    - Server sendet *ServerHelloDone* um die Beendigung seiner Übertragungen anzuzeigen
+    - *ClientKeyExchange* mit Schlüsselinformationen des Clients verschlüsselt mit PublicKey des Servers
+    - Client generiert aus seinem und Serverinformationen den gemeinsamen Schlüssel
+    - Server ebenfalls
+    - Client sendet *ChangeCipherSpec* um Aktivierung der Verschlüsselung anzuzeigen
+    - Client sendet *Finish* um die Beendigung des Verfahrens anzuzeigen
+    - Server sendet *ChangeCipherSpec* und *Finish*
+- besteht aus folgenden 5 Protokollen:
+    - Handshake Protocol
+        - zum Aufbau der Verbindung s.o.
+    - Change Cipher Spec Protoco
+        - 1 Byte Nachricht, die *Verschlüsselung aktiv* anzeigt
+    - Alert Protocol
+        - 1 Byte Nachricht für Fehlersignalisierung
+        - Typen -> fatal(beenden der Verbindung) oder Warning(Sitzung läuft weiter)
+    - Application Protocol
+        - Protokolle höherer Schichten die TLS nutzen (HTTPS, PEAP, EPA-TLS, SSH)
+    - Record Layer Protocol
+        - stellt Transport Container zur Verfügung für höhere Schichten
+        - Daten bekommen zusätzlichen HASH
+        - Daten, Hash und Padding werden verschlüsselt
+        - voranstellen des Headers mit Length, Version, Protocol
+- **Cipher Suite**
+        - besteht aus 1 Byte Nachricht, die anzeigt das nun Verschlüsselung aktiv ist
+        - Sammlung von Chiffrierungsvorschriften, Schlüsseln und Austauschverfahren
+        - asymmetrisches Verfahren für Schlüsselaustausch (RSA, Diffie Helman)
+        - symmetrisches Verfahren mit gemeinsamen Code (DES,3DES, IDEA, AES)
+        - Message Digest Methode (MD5, SHA-1, SHA-2)
+
+
+## DTLS
+
+- Datagram Transport Layer Security
+- ermöglicht TLS über UDP
+- für Anwendungen, wie SIP, VoIP etc
+- fügt im wesentlichen TCP Eigenschaften hinzu
+    - Sequenznummern
+    - Retransmission Timer
+    - PMTU Discovery
+    - Fragmentierung mit *Fragment Offset* und *Fragment Length*
+    - Reply Detection
+    - Cookie austausche im Handshake Protocol gegen DoS (ähnlich TCP Syn Cookie)
